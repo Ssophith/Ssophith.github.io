@@ -1,0 +1,349 @@
+	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facebook</title>
+<style>
+    h1 {
+        color: #1877F2;
+        font-size: 50px; /* Фонтын хэмжээ */
+        line-height: 1;
+        margin: 0; /* Илүүдэл зайг арилгах */
+        }
+    c2 {
+        color: #fefefe;
+        font-size: 16px; /* Фонтын хэмжээ */
+        line-height: 1;
+        margin: 0; /* Илүүдэл зайг арилгах */
+    }
+    d2 {
+        color: #7ecae4;
+        font-size: 16px; /* Фонтын хэмжээ */
+        line-height: 1;
+        margin: 0; /* Илүүдэл зайг арилгах */
+    }
+    e2 {
+        color: #000000;
+        font-size: 16px; /* Фонтын хэмжээ */
+        line-height: 1;
+        margin: 0; /* Илүүдэл зайг арилгах */
+    }
+    .center-text td {
+            text-align: center;
+        }
+    .menu {
+        display: flex; /* Холбоосуудыг нэг мөрөнд гаргах */
+        gap: 7px; /* Холбоос хоорондын зай */
+    }
+    .menu a {
+        color: white; /* Линкүүдийг цагаан болгох */
+        text-decoration: none; /* Доогуур зураас арилгах */
+    }
+    .men {
+        display: flex; /* Нэг мөрөнд зэрэгцүүлэх */
+        flex-direction: column;
+        align-items: flex-start; /* Элементийн дээд хэсгээр зэрэгцүүлэх */
+        gap: 5px; /* Линкүүдийн хоорондын зай */
+        padding: 3px; /* Дотор ирмэгийн зай */
+    }
+    .men b {
+        text-decoration: none; /* Доогуур зураас арилгах */
+        padding: 5px; /* Линкүүдэд дотор зай өгөх */
+        display: block; /* Линк бүрийг шинэ мөрөнд байрлуулах */
+    }
+    .table-container {
+            position: absolute; /* Дэлгэцийн дээд талд байрлуулах */
+            top: 0; /* Дээд талд байрлуулах */
+            left: 0; /* Зүүн талд байрлуулах */
+            width: 100%; /* Өргөн 100% */
+        }
+    table {
+        border-collapse: collapse; /* Хүрээг нийлүүлэх */
+        margin-bottom: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+        vertical-align: middle;
+    }
+    .highlight {
+        background-color: #35609a;
+    }
+    .float-left {
+        float: left;
+    }
+    .float-right {
+        float: right;
+        }
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Зай нэмэх */
+    }
+    .search-input {
+        padding: 5px;
+        background-color: #d3d3d3; /* Саарал өнгө */
+        border: 1px solid #000000;
+        border-radius: 5px;
+    }
+    button {
+        background-color: #1877F2; 
+        color: white; 
+        padding: 10px 10px; 
+        text-align: center; 
+        font-size: 16px; 
+        border: none; 
+        cursor: pointer; 
+        width: 50px;
+        font-size: 16px;
+        border-radius: 0px;
+    }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 баганатай */
+            gap: 0px;
+            text-align: center;
+            margin-top: 0px;
+        }
+        .user img {
+            width: 100px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 0px;
+        }
+        .user p {
+            margin: 0px 0 0;
+            font-size: 12px;
+        }
+  
+
+</style>
+</head>
+
+<body>
+
+<table border="1" width="100%" height="720px">
+<tr>
+<td class="highlight" colspan="3" style="width: 100%; height: 10%; background-image: url('logoface.jpg'); background-size: cover; background-position: center;">>
+    <table class="float-right" border="0">
+        <tr>
+            <td>
+                <h1>[Facebook]</h1>
+                <div class="menu">
+                    <a href="home.html">Home</a>
+                    <a href="search.html">Search</a>
+                    <a href="global.html">Global</a>
+                    <a href="social net.html">Social Net</a>
+                    <a href="invite.html">Invite</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="logout.html">Logout</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</td>
+</tr>
+<tr>
+    <td rowspan="2" width="15%">
+        
+        <table style="border: 1px dashed black; width: 100%; height: 8px;">
+            <tr>
+                <td>
+                    <form class="search-form" action="/search" method="get">
+                        <input type="text" name="query">
+                    </form>
+                        quick search
+                    <button>go</button>
+                </td>
+            </tr>
+        </table>
+        <table style="border: 1px dashed black; width: 100%; height: 40px;">
+            <tr>
+                <td>
+                    <div class="men">
+                        <a href="pro.html">My Profile [edit]</a>
+                        <a href="friends.html">My Friends</a>
+                        <a href="groups.html">My Groups</a>
+                        <a href="parties.html">My Parties</a>
+                        <a href="msg.html">My Messages</a>
+                        <a href="acc.html">My Account</a>
+                        <a href="privacy.html">My Privacy</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="100%" height="600px">
+            <tr>
+                <td style="width: 100%; height: 100%; background-image: url('add pic.png'); background-size: cover; background-position: center;">>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+<td rowspan="2" width="80%">
+    <table border="0" width="100%" height="100%">
+        <tr>
+            <td class="highlight" height="3%">
+                <c2 class="float-left">Brian Moore's Profile</c2>
+                <c2 class="float-right">Puget Sound</c2>
+            </td>
+        </tr>
+    
+        <tr>
+            <td>
+                <table border="0" width="100%" height="100%">
+                    <tr>
+                        <td width="45%">
+                            <table border="1" width="100%" height="25%">
+                                <tr>
+                                    <td class="highlight" height="3%">
+                                        <c2 class="float-left">Picture</c2>
+                                    </td>
+                                </tr>
+                                <tr  class="center-text">
+                                    <td>
+                                        <img src="guy.png" width="180px">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" width="100%" height="7%">
+                                <tr>
+                                    <td>
+                                        <d2 class="float-left">Send Brian a Message</d2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <d2 class="float-left">Poke Him!</d2>
+                                    </td>
+                                </tr>
+                            </table>
+                        <table border="1" width="100%" height="7%">
+                            <tr>
+                                <td class="highlight" height="3%">
+                                    <c2 class="float-left">Connection</c2>
+                                </td>
+                            </tr>
+                            <tr  class="center-text">
+                                <td>
+                                    You are in relationship with Brian.
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="1" width="100%" height="7%">
+                            <tr>
+                                <td class="highlight" height="3%">
+                                    <c2 class="float-left">Mutual Friends</c2>
+                                </td>
+                            </tr>
+                            <tr  class="center-text">
+                                <td>
+                                    You have <d2>19 friends</d2> in common with Brian.
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="1" width="100%" height="7%">
+                            <tr>
+                                <td class="highlight" height="3%">
+                                    <c2 class="float-left">Access</c2>
+                                </td>
+                            </tr>
+                            <tr  class="center-text">
+                                <td>
+                                    Brian is currently logged in from a non-residential location.
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="1" width="100%" height="40%">
+                            <tr>
+                                <td class="highlight" height="3%">
+                                    <c2 class="float-left">Access</c2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="grid">
+                                        <div class="user">
+                                            <img src="kerala.png" alt="Kerala Hise">
+                                            <p>Kerala Hise</p>
+                                        </div>
+                                        <div class="user">
+                                            <img src="jennifer.png" alt="Jennifer McFadden">
+                                            <p>Jennifer McFadden</p>
+                                        </div>
+                                        <div class="user">
+                                            <img src="amy.png" alt="Amy Graeber">
+                                            <p>Amy Graeber</p>
+                                        </div>
+                                        <div class="user">
+                                            <img src="sarah.png" alt="Sarah">
+                                            <p>Sarah</p>
+                                        </div>
+                                        <div class="user">
+                                            <img src="vu.png" alt="Vu Tran">
+                                            <p>Vu Tran</p>
+                                        </div>
+                                        <div class="user">
+                                            <img src="briana.png" alt="Briana Skir">
+                                            <p>Briana Skir</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <td>
+                            <table border="1" width="100%" height="7%">
+                                <tr>
+                                    <td class="highlight" height="3%">
+                                        <c2 class="float-left">Information</c2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="0" width="100%" height="100%">
+                                            <tr><td width="30%"><b>Account info:</b></td><td></td></tr>
+                                            <tr><td>name:</td><td>Brian Moore</td></tr>
+                                            <tr><td>Member since:</td><td>may 21, 2005</td></tr>
+                                            <tr><td>last update:</td><td>july 19, 2005</td></tr>
+                                            <tr><td><b>Basic info:</b></td><td></td></tr>
+                                            <tr><td>school:</td><td><d2>puget sound 09</d2></td></tr>
+                                            <tr><td>status:</td><td>student</td></tr>
+                                            <tr><td>sex:</td><td><d2>male</d2></td></tr>
+                                            <tr><td>residence:</td><td><d2>todd 311</d2></td></tr>
+                                            <tr><td>birthday:</td><td><d2>09/02/1986</d2></td></tr>
+                                            <tr><td>home town:</td><td><d2>shorewood, w1 53211</d2></td></tr>
+                                            <tr><td>high school:</td><td><d2>shorewood hi</d2></td></tr>
+                                            <tr><td><b>Contact info:</b></td><td></td></tr>
+                                            <tr><td>email:</td><td>bmoore@ups.edu</td></tr>
+                                            <tr><td>screenname:</td><td><d2>doctabu</d2></td></tr>
+                                            <tr><td>mobile:</td><td><d2>73485967439</d2></td></tr>
+                                            <tr><td>websites:</td><td><d2>http://.oiue.com</d2></td></tr>
+                                            <tr><td><b>Personal info:</b></td><td></td></tr>
+                                            <tr><td>looking for:</td><td><d2>Praesent feugiat quis enim sed volutpat. </d2></td></tr>
+                                            <tr><td>intrested in:</td><td><d2>Sed maximus lectus a enim aliquet cursus. In lacinia auctor massa, in vulputate sem molestie vitae.</d2></td></tr>
+                                            <tr><td>rel status:</td><td><d2>In lacinia auctor massa, in vulputate sem molestie vitae.</d2></td></tr>
+                                            <tr><td>political views:</td><td><d2>Praesent feugiat quis enim sed volu.</d2></td></tr>
+                                            <tr><td>interests:</td><td><d2>Sed maximus lectus a enim aliquet cursus.</d2></td></tr>
+                                            <tr><td>fav musk:</td><td><d2>In lacinia auctor massa, in vulputate sem molestie vitae.</d2></td></tr>
+                                            <tr><td>fav movies:</td><td><d2>In lacinia auctor massa, in vulputate sem molestie vitae.</d2></td></tr>
+                                            <tr><td><b>About me:</b></td><td>Sed maximus lectus a enim aliquet cursus. In lacinia auctor massa, in vulputate sem molestie vitae.</td></tr>
+                                        </table>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+            </td>
+        </tr>
+    </table>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
