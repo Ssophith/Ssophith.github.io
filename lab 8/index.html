@@ -114,11 +114,9 @@
   <li>
   <div class="task">
     <p>Петя найзтайгаа дараах тоглоомыг тоглож байв. Ширээн дээр n ширхэг зоос байв. Петя эхлээд к тооны зоос авна. Найз нь к+1-ээс хэтрэхгүй тооны зоос авна. Хамгийн сүүлийн зоосыг авсан нь хожигдоно. Петя зайлшгүй хожихийн тулд хамгийн түрүүнд хэдэн зоос авах шаардлагатай вэ? Хожих боломжгүй бол 0 гэсэн утга гарга.</p>
-    <label>Нийт зоос :</label>
-    <input type="text" id="coinN">
-    <label>Петягийн авах тоо (k):</label>
-    <input type="text" id="coinK">
-    <button onclick="olympiadGame()">Шалгах</button>
+    <label>Нийт зоос (n):</label>
+    <input type="number" id="coinN">
+    <button onclick="findBestK()">Шалгах</button>
     <div id="gameResult"></div>
   </div>
   </li>
@@ -216,35 +214,47 @@
     ` ${entrance}-р орц, ${floor}-р давхар, ${door}-р хаалга`;
   }
 
-  function olympiadGame() {
-    const n = parseInt(document.getElementById("coinN").value);
-    const k = parseInt(document.getElementById("coinK").value);
-    const memo = {};
+  function findBestK() {
+  const n = parseInt(document.getElementById("coinN").value);
+  let bestK = 0;
 
-  function canWin(remaining, maxPick) {
-    const key = `${remaining}-${maxPick}`;
-    if (memo[key] !== undefined) return memo[key];
-      for (let pick = 1; pick <= maxPick; pick++) {
-      const next = remaining - pick;
-        if (next <= 0) continue;
-        if (!canWin(next, maxPick + 1)) {
-          memo[key] = true;
-          return true;
-        }
-      }
-      memo[key] = false;
-    return false;
+  for (let k = 1; k <= n; k++) {
+    if (canPetyaWin(n, k)) {
+      bestK = k;
+      break;
+    }
   }
-      for (let i = 1; i <= k; i++) {
-        const next = n - i;
-          if (next <= 0) continue;
-          if (!canWin(next, k + 1)) {
-              document.getElementById("gameResult").innerText = `Петя ${i} авч хожино`;
-            return;
-          }
-      }
-    document.getElementById("gameResult").innerText = "Хожих боломжгүй: 0";
+
+  const result = document.getElementById("gameResult");
+  if (bestK > 0) {
+    result.innerHTML = `Петя <strong>${bestK}</strong> ширхэг зоос авбал заавал хожно.`;
+  } else {
+    result.innerHTML = `Петя ямар ч тохиолдолд хожих боломжгүй байна.`;
   }
+}
+
+function canPetyaWin(n, k) {
+  const memo = {};
+
+  function isWinning(left, prevMove) {
+    const key = `${left},${prevMove}`;
+    if (key in memo) return memo[key];
+
+    if (left <= 0) return false; // Сүүлийн зоос авсан → хожигдсон
+
+    for (let take = 1; take <= prevMove + 1; take++) {
+      if (!isWinning(left - take, take)) {
+        memo[key] = true;
+        return true; // Дараагийн тоглогч хожигдох байрлалд хүрж байна
+      }
+    }
+
+    memo[key] = false;
+    return false; // Ямар ч хожих боломжгүй
+  }
+
+  return isWinning(n - k, k);
+}
 
   function showTimeBasedSquare() {
     const now = new Date();
