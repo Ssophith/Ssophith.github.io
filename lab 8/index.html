@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title style="text-align: center;">Бодлогууд</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+    #mainContainer {
+      position: relative;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    #shape {
+      width: 50px;
+      height: 50px;
+      position: absolute; /* 📌 Fixed биш боллоо */
+      bottom: 10px;
+      right: 10px;
+      border-radius: 8px;
+    }
+    .task { margin-top: 0%;
+    margin-bottom: 30px; }
+    button { 
+        margin-left: 20px;
+        background-color: rgb(189, 188, 188); 
+        color: rgb(0, 0, 0); 
+        text-align: center; 
+        border: none; 
+        width: 100px;
+        padding: 8px;
+        border-radius: 8px;
+    }
+    input {
+        margin-left: 20px;
+        padding: 6px; 
+    }
+  </style>
+</head>
+<body>
+<div id="mainContainer">
+  <h1 style="text-align: center; margin-top: 0%;">Бодлогууд</h1>
+<ol>
+  <!-- 1. Палиндром -->
+  <li>
+  <div class="task">
+    <p>Вэб сайтад орсон хүний нэрийг асуугаад нэр нь палиндром мөн эсэхийг шалга.</p>
+    <label>Нэр:</label>
+    <input type="text" id="nameInput">
+    <button onclick="checkPalindrome()">Шалгах</button>
+    <div id="palindromeResult"></div>
+  </div>
+  </li>
+  <!-- 2. Цифрүүдийн нийлбэр -->
+  <li>
+  <div class="task">
+    <p>Гараас өгсөн тооны цифрүүдийн нийлбэрийг ол.</p>
+    <label>Тоон утга:</label>
+    <input type="text" id="digitInput">
+    <button onclick="digitSum()">Шалгах</button>
+    <div id="digitSumResult"></div>
+  </div>
+  </li>
+  <!-- 3. Анхны тоон задрал -->
+   <li>
+  <div class="task">
+    <p>Гараас өгсөн тоог анхны тоонуудын нийлбэрт задал.</p>
+    <label>Тоон утга:</label>
+    <input type="text" id="primeInput">
+    <button onclick="primeSumDecomposition()">Шалгах</button>
+    <div id="primeResult"></div>
+  </div>
+</li>
+  <!-- 4. Чоно туулай -->
+  <li>
+  <div class="task">
+    <p>Чоно 25 км/ц хурдтай, туулай 18 км/ц хурдтай. Гараас өгсөн зайтай байхад хэдэн минут хэдэн секундын дараа гэхэд гүйцэх вэ?</p>
+    <label>Зай (км):</label>
+    <input type="text" id="distanceInput">
+    <button onclick="wolfCatchRabbit()">Шалгах</button>
+    <div id="catchResult"></div>
+  </div>
+  </li>
+  <!-- 5. Тэгш сондгой ялгах -->
+  <li>
+  <div class="task">
+    <p>Хүснэгтэнд (array)-д байгаа утгуудыг тэгш сондгойгоор ялгаж харуул.</p>
+    <label>Тоонууд (1,2,3):</label>
+    <input type="text" id="arrayInput">
+    <button onclick="splitEvenOdd()">Шалгах</button>
+    <div id="evenOddResult"></div>
+  </div>
+  </li>
+  <!-- 6. Орон сууцны байршил -->
+  <li>
+  <div class="task">
+    <p>Байшин 9 давхар, 3 орцтой, давхартаа 4 айлтай бол гараас өгсөн тоот нь хэддүгээр орцны хэддүгээр давхарын хэд дэх хаалга вэ?</p>
+    <label>Тоот:</label>
+    <input type="text" id="aptNumberInput">
+    <button onclick="houseAddress()">Шалгах</button>
+    <div id="houseResult"></div>
+  </div>
+  </li>
+  <!-- 7. Өглөө/орой дүрс -->
+  <div id="shape"></div>
+  <!-- 8. Олимпиад -->
+  <li>
+  <div class="task">
+    <p>Петя найзтайгаа дараах тоглоомыг тоглож байв. Ширээн дээр n ширхэг зоос байв. Петя эхлээд к тооны зоос авна. Найз нь к+1-ээс хэтрэхгүй тооны зоос авна. Хамгийн сүүлийн зоосыг авсан нь хожигдоно. Петя зайлшгүй хожихийн тулд хамгийн түрүүнд хэдэн зоос авах шаардлагатай вэ? Хожих боломжгүй бол 0 гэсэн утга гарга.</p>
+    <label>Нийт зоос :</label>
+    <input type="text" id="coinN">
+    <label>Петягийн авах тоо (k):</label>
+    <input type="text" id="coinK">
+    <button onclick="olympiadGame()">Шалгах</button>
+    <div id="gameResult"></div>
+  </div>
+  </li>
+</ol>
+</div>
+  <!-- JS -->
+  <script>
+    function checkPalindrome() {
+      const name = document.getElementById("nameInput").value;
+      const reversed = name.split('').reverse().join('');
+      const res = name === reversed ? "Палиндром мөн" : "Палиндром биш";
+      document.getElementById("palindromeResult").innerText = res;
+    }
+
+    function digitSum() {
+      const num = document.getElementById("digitInput").value;
+      const sum = [...num].reduce((s, d) => s + (/\d/.test(d) ? parseInt(d) : 0), 0);
+      document.getElementById("digitSumResult").innerText = "Нийлбэр: " + sum;
+    }
+
+    function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+  function primeSumDecomposition() {
+    const target = parseInt(document.getElementById("primeInput").value);
+      if (target < 4) {
+        document.getElementById("primeResult").innerText = "2 ба түүнээс их, дор хаяж 2 анхны тооны нийлбэр оруулна уу.";
+      return;
+    }
+    let minCombo = null;
+
+  function backtrack(sum, combo, start) {
+    if (sum === target && combo.length >= 2) {
+      if (!minCombo || combo.length < minCombo.length) {
+        minCombo = [...combo];
+      }
+      return;
+    }
+
+    if (sum >= target || (minCombo && combo.length >= minCombo.length)) return;
+
+    for (let i = start; i <= target; i++) {
+      if (isPrime(i)) {
+        combo.push(i);
+        backtrack(sum + i, combo, i);
+        combo.pop();
+      }
+    }
+    }
+        backtrack(0, [], 2);
+    
+      if (minCombo) {
+        document.getElementById("primeResult").innerText = "Задрал: " + minCombo.join(" + ");
+      } else {
+        document.getElementById("primeResult").innerText = "Задлах боломжгүй.";
+    }
+  }
+
+
+  function wolfCatchRabbit() {
+    const d = parseFloat(document.getElementById("distanceInput").value);
+    const tSec = (d / (25 - 18)) * 3600;
+    const m = Math.floor(tSec / 60);
+    const s = Math.round(tSec % 60);
+    document.getElementById("catchResult").innerText = `${m} минут ${s} секунд`;
+  }
+
+  function splitEvenOdd() {
+    const input = document.getElementById("arrayInput").value;
+    const arr = input.split(',').map(Number);
+    const even = arr.filter(x => x % 2 === 0);
+    const odd = arr.filter(x => x % 2 !== 0);
+    document.getElementById("evenOddResult").innerText =
+      "Тэгш: " + even.join(", ") + "\nСондгой: " + odd.join(", ");
+  }
+
+  function houseAddress() {
+    const n = parseInt(document.getElementById("aptNumberInput").value);
+    const perEntrance = 9 * 4; 
+    const maxApt = perEntrance * 3; 
+      if (n < 1 || n > maxApt) {
+        document.getElementById("houseResult").innerText =
+        "Тоот 1-ээс 108-ийн хооронд байх ёстой!";
+    return;
+  }
+    const entrance = Math.ceil(n / perEntrance);
+    const floor = Math.ceil(((n - 1) % perEntrance + 1) / 4);
+    const door = ((n - 1) % 4) + 1;
+      document.getElementById("houseResult").innerText =
+    ` ${entrance}-р орц, ${floor}-р давхар, ${door}-р хаалга`;
+  }
+
+  function olympiadGame() {
+    const n = parseInt(document.getElementById("coinN").value);
+    const k = parseInt(document.getElementById("coinK").value);
+    const memo = {};
+
+  function canWin(remaining, maxPick) {
+    const key = `${remaining}-${maxPick}`;
+    if (memo[key] !== undefined) return memo[key];
+      for (let pick = 1; pick <= maxPick; pick++) {
+      const next = remaining - pick;
+        if (next <= 0) continue;
+        if (!canWin(next, maxPick + 1)) {
+          memo[key] = true;
+          return true;
+        }
+      }
+      memo[key] = false;
+    return false;
+  }
+      for (let i = 1; i <= k; i++) {
+        const next = n - i;
+          if (next <= 0) continue;
+          if (!canWin(next, k + 1)) {
+              document.getElementById("gameResult").innerText = `Петя ${i} авч хожино`;
+            return;
+          }
+      }
+    document.getElementById("gameResult").innerText = "Хожих боломжгүй: 0";
+  }
+
+  function showTimeBasedSquare() {
+    const now = new Date();
+    const hour = now.getHours();
+    const shape = document.getElementById("shape");
+
+  if (7<hour && hour < 20) {
+    shape.style.backgroundColor = "green";
+    shape.style.top = "0";
+    shape.style.left = "0";
+    shape.style.bottom = "";
+    shape.style.right = "";
+  } else {
+    shape.style.backgroundColor = "red";
+    shape.style.bottom = "0";
+    shape.style.right = "0";
+    shape.style.top = "";
+    shape.style.left = "";
+  }
+  }
+
+  window.onload = showTimeBasedSquare;
+  </script>
+</body>
+</html>
