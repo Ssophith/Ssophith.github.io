@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Валютын ханш хөрвүүлэгч</title>
+<style>
+    body {
+        font-family: Arial;
+        max-width: 400px;
+        margin: 30px auto;
+        text-align: center;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+        width: 92%;
+        padding: 10px;
+        font-size: 20px;
+        text-align: right;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+    }
+    select{
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+    }
+    button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+    }
+    .numpad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 15px 0;
+    }
+    .numpad button {
+        padding: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+    .clear-btn {
+        grid-column: span 3;
+    }
+    .currency-select-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+    .currency-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .currency-group label {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+    .currency-group select {
+        padding: 10px;
+        font-size: 16px;
+    }
+    button#convertBtn {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    #result {
+        margin-top: 15px;
+        font-size: 22px;
+        color: #333;
+    }
+  </style>
+</head>
+<body>
+    <h2>Валют хөрвүүлэгч</h2>
+
+    <input type="text" id="amountInput" readonly placeholder="Дүн оруулна уу">
+
+    <div class="numpad">
+        <button onclick="appendNum('1')">1</button>
+        <button onclick="appendNum('2')">2</button>
+        <button onclick="appendNum('3')">3</button>
+        <button onclick="appendNum('4')">4</button>
+        <button onclick="appendNum('5')">5</button>
+        <button onclick="appendNum('6')">6</button>
+        <button onclick="appendNum('7')">7</button>
+        <button onclick="appendNum('8')">8</button>
+        <button onclick="appendNum('9')">9</button>
+        <button onclick="appendNum('.')">.</button>
+        <button onclick="appendNum('0')">0</button>
+        <button onclick="backspaceInput()">⌫</button>
+        <button class="clear-btn" onclick="clearInput()">Бүгдийг устгах</button>
+    </div>
+
+    <div class="currency-select-row">
+        <div class="currency-group">
+            <label>Өөрийн валют:</label>
+            <select id="fromCurrency"></select>
+        </div>
+        <div class="currency-group">
+            <label>Хөрвүүлэх валют:</label>
+            <select id="toCurrency"></select>
+        </div>
+    </div>
+    <button id="convertBtn" onclick="convertCurrency()">Хөрвүүлэх</button>
+
+    <h3 id="result">Үр дүн: </h3>
+    <script>
+    const exchangeArray = [
+        { name: 'USD', value: 1 },
+        { name: 'EUR', value: 0.88 },
+        { name: 'POUND', value: 0.75 },
+        { name: 'WON', value: 1433 },
+        { name: 'YEN', value: 142 },
+        { name: 'YAN', value: 7.31 },
+        { name: 'MNT', value: 3537 }
+    ];
+
+    const fromSelect = document.getElementById("fromCurrency");
+    const toSelect = document.getElementById("toCurrency");
+
+    exchangeArray.forEach(currency => {
+        const option1 = new Option(currency.name, currency.value);
+        const option2 = new Option(currency.name, currency.value);
+        fromSelect.add(option1.cloneNode(true));
+        toSelect.add(option2.cloneNode(true));
+    });
+
+    function appendNum(num) {
+        const input = document.getElementById("amountInput");
+        input.value += num;
+    }
+
+    function clearInput() {
+        document.getElementById("amountInput").value = "";
+    }
+
+    function backspaceInput() {
+        const input = document.getElementById("amountInput");
+        input.value = input.value.slice(0, -1);
+    } 
+
+    function convertCurrency() {
+        const amount = parseFloat(document.getElementById("amountInput").value);
+        const fromValue = parseFloat(fromSelect.value);
+        const toValue = parseFloat(toSelect.value);
+
+    if (isNaN(amount)) {
+        document.getElementById("result").innerText = "Буруу дүн оруулсан байна!";
+        return;
+    }
+        const converted = (amount / fromValue) * toValue;
+        document.getElementById("result").innerText = `Үр дүн: ${converted.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
