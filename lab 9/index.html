@@ -143,8 +143,9 @@
 
     function appendNum(num) {
         const input = document.getElementById("amountInput");
+        if (num === '.' && input.value.includes('.')) return;
         input.value += num;
-    }
+}
 
     function clearInput() {
         document.getElementById("amountInput").value = "";
