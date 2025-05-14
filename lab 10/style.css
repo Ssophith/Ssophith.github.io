@@ -1,0 +1,169 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+#login-screen {
+        width: 800px;
+        height: 600px;
+        margin: 30px auto;
+        text-align: center;
+        color: rgb(6, 6, 6);
+        padding: 20px;
+        border: 1px solid rgb(2, 2, 2);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgb(2, 2, 2);
+}
+.wrap {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background.jpg');
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#game-container {
+  position: relative;
+    width: 800px;
+    height: 600px;
+    text-align: center;
+    color: rgb(6, 6, 6);
+    padding: 20px;
+    border: 1px solid rgb(2, 2, 2);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgb(2, 2, 2);
+    background-color: rgba(235, 225, 110, 0.8);  
+    display: block; /* эсвэл тайлчих */
+}
+#end-screen {
+        width: 800px;
+        height: 600px;
+        margin: 30px auto;
+        text-align: center;
+        color: rgb(6, 6, 6);
+        padding: 20px;
+        border: 1px solid rgb(2, 2, 2);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgb(2, 2, 2);
+}
+button {
+        width: 80px;
+        padding: 10px;
+        font-size: 20px;
+        margin: 5px;
+        color: white;
+        background-color: rgb(54, 41, 67);
+        border-radius: 12px;
+        border: 1px solid black;
+}
+input {
+        width: 180px;
+        padding: 10px;
+        font-size: 20px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid rgb(54, 41, 67);
+}
+.login {
+        width: 350px;
+        margin: 180px auto;
+        padding: 20px;
+        font-size: 22px;
+        text-align: center;
+        color: rgb(54, 41, 67);
+        background-color: rgb(235, 225, 110);
+        border: 1px solid rgb(2, 2, 2);
+        border-radius: 12px;
+}
+.game-screen {
+        width: 500px;
+        height: 500px;
+        margin: 70px auto;
+        padding: 20px;
+}
+.end {
+        width: 350px;
+        margin: 180px auto;
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+        color: rgb(54, 41, 67);
+        background-color: rgb(235, 225, 110);
+        border: 1px solid rgb(2, 2, 2);
+        border-radius: 12px;
+}
+.end button {
+        width: 140px;
+        padding: 10px;
+        font-size: 20px;
+        margin: 5px;
+        color: white;
+        background-color: rgb(54, 41, 67);
+        border-radius: 12px;
+        border: 1px solid black;
+}
+
+#scoreboard {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+  
+  width: 180px;
+  height: 240px;
+  background-color: rgb(235, 225, 110);
+  border: 1px solid rgb(54, 41, 67);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: left;
+  justify-content: center;
+}
+
+
+#word-container span {
+  display: inline-block;
+  border: 2px solid #000;
+  border-radius: 12px;
+  background-color: rgb(54, 41, 67);
+  color: white;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 5px;
+  font-size: 18px;
+}
+#keyboard button {
+  padding: 10px;
+  margin: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 35px;
+}
+#hangman-canvas {
+  width: 200px;
+  height: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(235, 225, 110);
+  border: 1px solid rgb(54, 41, 67);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+}
+.word-screen {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+
+  width: 180px;
+  background-color: rgb(235, 225, 110);
+  border: 1px solid rgb(54, 41, 67);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+}

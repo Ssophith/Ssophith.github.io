@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hangman</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="login-screen" style="display: block; width: 800px; height: 600px; background-image: url('background.jpg');">
+    <div class="login">
+    <h2>Нэрээ оруулна уу</h2>
+    <input type="text" id="nickname" placeholder="Таны нэр" />
+    <button onclick="startGame()">Эхлэх</button>
+    </div>
+  </div>
+
+  <div class="wrap" style="display: none;">
+  <div id="game-container" style="display: none;">
+    <div class="game-screen">
+      <div id="top">
+        <div>
+          <h3 id="hint">Асуулт: </h3>
+          <div id="word-container"></div>
+          <div class="word-screen">
+            <p>Оноо: <span id="score">0</span></p>
+            <p>Амь: <span id="lives">4</span></p>
+            <p>Хугацаа: <span id="timer">60</span> сек</p>
+            <p>Хамгийн өндөр оноо: <span id="user-highscore">0</span></p>
+          </div>
+        </div>
+        <canvas id="hangman-canvas" width="150" height="150"></canvas>
+      </div>
+
+      <div id="keyboard"></div>
+    </div>
+
+    <div id="scoreboard">
+      <h3 style="text-align: center;">ТОП 10 ТОГЛОГЧ</h3>
+      <ol id="leaderboard-list" style="list-style: none; padding: 0; margin: 0;""></ol>
+    </div>
+  </div>
+  </div>
+
+  <div id="end-screen" style="display: none; text-align: center; width: 800px; height: 600px; background-image: url('background.jpg');" >
+    <div class="end">
+    <h2 id="final-score-msg"></h2>
+        <button onclick="restartGame()">Дахин эхлэх</button>
+        <button onclick="exitGame()">Гарах</button>
+    </div>
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
