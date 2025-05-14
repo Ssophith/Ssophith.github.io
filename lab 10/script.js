@@ -21,7 +21,6 @@ const words = [
   { hint: "Өнгө", answer: "цэнхэр" },
 ];
 
-
 const mongolKeyboard = "АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯ".toLowerCase().split("");
 
 let selectedWord = "";
@@ -60,7 +59,6 @@ function updateUserHighscore(nickname) {
   document.getElementById("user-highscore").innerText = highscore;
 }
 
-
 function nextWord() {
   const word = words[Math.floor(Math.random() * words.length)];
   selectedWord = word.answer;
@@ -73,8 +71,12 @@ function nextWord() {
     .map((_, i) => `<span id="char${i}">_</span>`)
     .join("");
   document.getElementById("lives").innerText = lives;
-}
 
+  const buttons = document.querySelectorAll("#keyboard button");
+  buttons.forEach(btn => {
+    btn.disabled = false;
+  });
+}
 
 function buildKeyboard() {
   const container = document.getElementById("keyboard");
@@ -88,6 +90,13 @@ function buildKeyboard() {
 }
 
 function handleKey(key) {
+  const buttons = document.querySelectorAll("#keyboard button");
+  buttons.forEach(btn => {
+    if (btn.textContent === key) {
+      btn.disabled = true;
+    }
+  });
+
   let found = false;
   for (let i = 0; i < selectedWord.length; i++) {
     if (selectedWord[i] === key && displayedWord[i] === "") {
@@ -109,7 +118,7 @@ function handleKey(key) {
       drawHangman(4);
       setTimeout(() => {
         endGame();
-      }, 1000);
+      }, 500);
       return; 
     }
   }
@@ -117,7 +126,7 @@ function handleKey(key) {
   if (displayedWord.join("") === selectedWord) {
     setTimeout(() => {
       nextWord();
-    }, 600);
+    }, 500);
   }
 }
 
@@ -165,8 +174,6 @@ function endGame() {
   updateUserHighscore(nickname);
 }
 
-
-
 function restartGame() {
   document.getElementById("end-screen").style.display = "none";
     document.querySelector(".wrap").style.display = "flex";
@@ -192,7 +199,6 @@ function exitGame() {
   document.cookie = "nickname=; max-age=0";
   location.reload(); 
 }
-
 
 function drawHangman(stage) {
   const canvas = document.getElementById("hangman-canvas");
@@ -283,7 +289,6 @@ function drawHangman(stage) {
     ctx.stroke();
   }
 }
-
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;

@@ -34,8 +34,8 @@ body {
     border: 1px solid rgb(2, 2, 2);
     border-radius: 12px;
     box-shadow: 0 0 20px rgb(2, 2, 2);
-    background-color: rgba(235, 225, 110, 0.8);  
-    display: block; /* эсвэл тайлчих */
+    background-color: rgba(255, 255, 252, 0.9);  
+    display: block; 
 }
 #end-screen {
         width: 800px;
@@ -73,14 +73,14 @@ input {
         font-size: 22px;
         text-align: center;
         color: rgb(54, 41, 67);
-        background-color: rgb(235, 225, 110);
+        background-color: rgb(252, 252, 252, 0.9);
         border: 1px solid rgb(2, 2, 2);
         border-radius: 12px;
 }
 .game-screen {
         width: 500px;
         height: 500px;
-        margin: 70px auto;
+        margin: 50px auto;
         padding: 20px;
 }
 .end {
@@ -90,7 +90,7 @@ input {
         font-size: 20px;
         text-align: center;
         color: rgb(54, 41, 67);
-        background-color: rgb(235, 225, 110);
+        background-color: rgb(252, 252, 251, 0.9);
         border: 1px solid rgb(2, 2, 2);
         border-radius: 12px;
 }
@@ -113,7 +113,7 @@ input {
   
   width: 180px;
   height: 240px;
-  background-color: rgb(235, 225, 110);
+  background-color: white;
   border: 1px solid rgb(54, 41, 67);
   border-radius: 12px;
   padding: 10px;
@@ -146,7 +146,7 @@ input {
   height: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: rgb(235, 225, 110);
+  background-color: white;
   border: 1px solid rgb(54, 41, 67);
   border-radius: 12px;
   padding: 10px;
@@ -160,7 +160,7 @@ input {
   z-index: 1;
 
   width: 180px;
-  background-color: rgb(235, 225, 110);
+  background-color: white;
   border: 1px solid rgb(54, 41, 67);
   border-radius: 12px;
   padding: 10px;
