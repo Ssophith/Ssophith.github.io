@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solongo's 21st | Burgundy Elegance</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,700&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-burgundy: #630d16;
+        --color-deep-burgundy: #3d050a;
+        --color-black: #0a0a0a;
+        --color-white: #ffffff;
+        --color-gold: #d4af37;
+        --seal-glow: #e2c04d;
+
+        --env-width: 350px;
+        --env-height: 230px;
+        --env-width1: 175px;
+        --env-height1: 110px;
+
+        --text1: 2em;
+        --text2: 1em;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        background-color: var(--color-black);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* --- Background Elements --- */
+      #bg-elements {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .floating {
+        position: absolute;
+        animation: floatAnim linear infinite;
+        opacity: 0;
+      }
+
+      @keyframes floatAnim {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.4;
+        }
+        80% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* --- Page Logic --- */
+      .page {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        perspective: 1000px;
+      }
+
+      .page.active {
+        display: flex;
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* --- Envelope --- */
+      .envelope-wrap {
+        position: relative;
+        width: var(--env-width);
+        height: var(--env-height);
+        cursor: pointer;
+      }
+
+      .envelope {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--color-burgundy);
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      }
+
+      .envelope .flap {
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-left: var(--env-width1) solid transparent;
+        border-right: var(--env-width1) solid transparent;
+        border-top: var(--env-height1) solid var(--color-burgundy);
+        transform-origin: top;
+        transition: transform 0.6s ease;
+        z-index: 4;
+      }
+
+      .envelope .pocket {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-deep-burgundy);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 0 0 10px 10px;
+        z-index: 3;
+      }
+
+      .envelope-wrap.open .flap {
+        transform: rotateX(180deg);
+        z-index: 1;
+      }
+
+      .seal {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(
+          circle,
+          var(--seal-glow),
+          var(--color-gold)
+        );
+        border-radius: 50%;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        animation: pulse 2s infinite;
+      }
+
+      .envelope-wrap.open .seal {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* --- Card --- */
+      /* Page 2-т зориулсан шинэчлэгдсэн загвар */
+      .invitation-card {
+        background: #fffaf5; /* Илүү дулаан ivory өнгө */
+        padding: 25px;
+        text-align: center;
+        border: 2px solid var(--color-gold); /* Алтлаг нарийн хүрээ */
+        outline: 6px solid var(--color-burgundy); /* Давхар Burgundy хүрээ */
+        outline-offset: -15px; /* Хүрээг дотогшоо оруулж ирэх */
+        box-shadow: 0 0 50px rgba(99, 13, 22, 0.3); /* Burgundy туяатай сүүдэр */
+        max-width: var(--env-width);
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      /* Гарчигны хэсэгт эффект нэмэх */
+      .card-title {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: var(--text1);
+        background: linear-gradient(to bottom, #630d16, #3d050a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 10px 0;
+        filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.1));
+      }
+
+      /* GIF хэсэгт зөөлөн хүрээ нэмэх */
+      .gif-section img {
+        width: var(--env-height1);
+        border: 2px solid var(--color-gold);
+        padding: 5px;
+        background: white;
+        border-radius: 50%; /* GIF-ийг дугуй хүрээнд оруулбал илүү хөөрхөн */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+
+      .info-item strong {
+        display: block;
+        text-transform: uppercase;
+        font-size: var(--text2);
+        letter-spacing: 2px;
+        color: #888;
+        margin-bottom: 5px;
+      }
+
+      .info-item span {
+        display: block;
+        font-size: var(--text2);
+        color: #111;
+        font-weight: 600;
+      }
+
+      .dont-be-late {
+        font-size: var(--text2) !important;
+        color: var(--color-burgundy) !important;
+        font-style: italic;
+        margin-top: 4px;
+        opacity: 0.8;
+      }
+
+      /* --- Location Styling --- */
+      .location-box {
+        margin: 10px;
+        padding: 12px;
+        background: #fdfaf5;
+        border-radius: 12px;
+        border: 1px solid #eee;
+        box-shadow: #3d050a 0 6px 6px;
+      }
+
+      .location-name {
+        display: block;
+        font-size: var(--text2) !important;
+        font-weight: 700 !important;
+        color: var(--color-burgundy) !important;
+        margin-bottom: 4px;
+      }
+
+      .location-address {
+        display: block;
+        font-size: var(--text2) !important;
+        color: #555 !important;
+        font-weight: 400 !important;
+        margin-bottom: 10px;
+      }
+
+      .map-container {
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      /* --- Dress Code Styling --- */
+      .dress-code-text {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: var(--text2) !important;
+        font-weight: 600;
+        background: linear-gradient(45deg, var(--color-burgundy), #a31621);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        margin-top: 5px;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.6;
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.05);
+        }
+      }
+
+      @media (max-width: 900px) {
+        :root {
+          --env-width: 70vw;
+          --env-height: 180px;
+          --env-width1: 35vw;
+          --env-height1: 90px;
+
+          --text1: 1.5em;
+          --text2: 0.8em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bg-elements"></div>
+    <div id="page1" class="page active">
+      <div class="envelope-wrap" id="envelope-wrap" onclick="openEnvelope()">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="seal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <p
+        style="
+          color: white;
+          margin-top: 20px;
+          font-size: 0.8em;
+          letter-spacing: 2px;
+          opacity: 0.7;
+        "
+      >
+      </p>
+    </div>
+    <div id="page2" class="page">
+      <div class="invitation-card">
+        <p
+          style="
+            letter-spacing: 4px;
+            font-size: 0.65em;
+            color: var(--color-burgundy);
+            font-weight: 600;
+            margin-bottom: 5px;
+            opacity: 0.8;
+          "
+        >
+          YOU ARE INVITED TO
+        </p>
+
+        <h1 class="card-title">My 21'st Birthday</h1>
+
+        <div class="gif-section">
+          <img
+            src="https://media.tenor.com/iEXG6pXoPY4AAAAm/sappy-seals.webp"
+            alt="Celebration GIF"
+          />
+        </div>
+        <div class="info-item">
+          <strong>When</strong>
+          <span>2026.02.13 | 17:30 PM</span>
+          <span class="dont-be-late">✨ don't be late pls ✨</span>
+        </div>
+
+        <div class="info-item" style="margin-top: 15px">
+          <div class="location-box">
+            <strong>Where</strong>
+            <span class="location-name">Lighthouse Local Bar</span>
+            <div class="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2697.1557675625495!2d106.90842169910442!3d47.9192110565938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9693006da10d9b%3A0xf749be0d696e42cf!2sLighthouse%20local%20bar!5e0!3m2!1sen!2smn!4v1770747537405!5m2!1sen!2smn"
+                width="100%"
+                height="60%"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="info-item" style="margin-top: 20px">
+          <strong>Dress Code</strong>
+          <span class="dress-code-text">"Effortlessly Lovely"</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Background Animation
+      const bg = document.getElementById("bg-elements");
+      const colors = ["#d4af37", "#630d16", "#ffffff"];
+      const shapes = ["✦", "❤︎", "•"];
+
+      function createFloatingElement() {
+        const el = document.createElement("div");
+        el.className = "floating";
+        el.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.top = "105vh";
+        el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        el.style.fontSize = Math.random() * 15 + 10 + "px";
+        const duration = Math.random() * 5 + 7;
+        el.style.animationDuration = duration + "s";
+        bg.appendChild(el);
+        setTimeout(() => el.remove(), duration * 10000);
+      }
+      setInterval(createFloatingElement, 100);
+
+      // Open Envelope Logic
+      function openEnvelope() {
+        const wrap = document.getElementById("envelope-wrap");
+        wrap.classList.add("open");
+
+        setTimeout(() => {
+          const p1 = document.getElementById("page1");
+          p1.style.transition = "opacity 0.6s, transform 0.6s";
+          p1.style.opacity = "0";
+          p1.style.transform = "translateY(-20px)";
+
+          setTimeout(() => {
+            p1.classList.remove("active");
+            document.getElementById("page2").classList.add("active");
+          }, 600);
+        }, 800);
+      }
+    </script>
+  </body>
+</html>
