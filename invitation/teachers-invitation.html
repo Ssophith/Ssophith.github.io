@@ -14,13 +14,42 @@
 *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:32px 20px;background:radial-gradient(ellipse at 20% 10%,#e7ecdf,transparent 55%),radial-gradient(ellipse at 90% 90%,#e9ddc6,transparent 50%),#f5f1e7;color:var(--ink);font-family:Arial,sans-serif}button{font:inherit}.page{text-align:center;width:100%}.intro-label,.eyebrow{font-size:11px;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:var(--gold)}.intro-title{font-family:Georgia,serif;font-size:clamp(28px,6vw,40px);font-weight:400;margin:18px 0 60px}.envelope-wrap{position:relative;display:block;width:min(340px,85vw);height:220px;margin:0 auto;border:0;padding:0;background:none;cursor:pointer;perspective:1000px}.envelope{height:100%;background:var(--green);border-radius:5px 5px 12px 12px;box-shadow:0 22px 45px #163c3326;position:relative}.flap{position:absolute;inset:0;background:#346254;clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform .7s;z-index:3}.pocket{position:absolute;inset:0;background:var(--deep);clip-path:polygon(0 0,50% 53%,100% 0,100% 100%,0 100%);border-radius:5px 5px 12px 12px;z-index:2}.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#ecd9a6,#b18b45);border:4px double #f4e7c4;color:var(--deep);z-index:4;font:28px Georgia,serif;transition:opacity .3s}.open .flap{transform:rotateX(180deg)}.open .seal{opacity:0}.hint{font-size:13px;margin-top:28px;color:#66776c}.intro-foot{font-size:12px;letter-spacing:1px;margin-top:45px}.card{position:relative;max-width:510px;margin:auto;padding:36px 38px 30px;background:var(--cream);border:1px solid #c6ab72;box-shadow:0 24px 70px #163c331a;animation:reveal .65s ease both}.card:before{content:"";position:absolute;inset:11px;border:1px solid #d5c5a3;pointer-events:none}.ornament{color:var(--gold);font-size:21px;letter-spacing:10px;margin:12px 0}.logo-slot{height:150px;width:150px;margin:0 auto 20px;display:grid;place-items:center;border:1px dashed #b5a47d;border-radius:50%;color:#8a805f;font-size:10px;letter-spacing:1px;overflow:hidden}.logo-slot img{display:block;max-width:100%;max-height:100%;object-fit:contain}.logo-slot.has-logo{border:0}.card h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(28px,6vw,37px);line-height:1.23;margin:14px 0 12px;color:var(--deep)}.greeting{font-size:15px;font-weight:700;color:var(--gold);margin:0 0 20px}.message{font-size:14px;line-height:1.85;margin:0;color:#53655c}.invite{font-size:15px;line-height:1.8;margin:18px 0 24px}.details{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #d8c8a7;border-bottom:1px solid #d8c8a7;padding:19px 0;gap:12px}.details>div+div{border-left:1px solid #d8c8a7}.label{display:block;font-size:10px;letter-spacing:2px;color:#7b816b;margin-bottom:9px}.value{font-family:Georgia,serif;font-size:30px;color:var(--deep)}.date{font-size:12px;margin-top:7px;color:#747c6c}.signature{font-size:13px;line-height:1.8;margin:22px 0 0}.signature strong{display:block;color:var(--green);font-size:14px}.back{border:0;background:none;color:#748176;font-size:12px;text-decoration:underline;cursor:pointer;margin-top:22px}.page[hidden]{display:none}@keyframes reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}button:focus-visible{outline:3px solid var(--gold);outline-offset:7px}@media(max-width:420px){body{padding:24px 16px}.card{padding:30px 26px 26px}.message,.invite{font-size:13px}.logo-slot{height:120px;width:120px}.intro-title{margin-bottom:48px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}@media print{body{background:white;padding:0}#page1,.back{display:none!important}#page2{display:block!important}.card{box-shadow:none;margin:20px auto}}
 
 /* Ягаан theme — үндсэн өнгийг эндээс өөрчилж болно. */
-:root{--green:#a54e76;--deep:#793552;--gold:#be6c91;--cream:#fff7fa;--ink:#65394e}
-body{background:radial-gradient(ellipse at 20% 10%,#f8dce9,transparent 55%),radial-gradient(ellipse at 90% 90%,#f1c9db,transparent 50%),#fff0f6;font-family:'Nunito',Arial,sans-serif}
-.flap{background:#c5779b}.envelope{box-shadow:0 22px 45px #79355226}.seal{background:linear-gradient(135deg,#fce1ed,#d18cae);border-color:#ffeaf3}
-.card{border-color:#d5a0b8;box-shadow:0 24px 70px #7935521a}.card:before{border-color:#e7bfd1}
-.card h1,.intro-title{font-family:'Caveat','Segoe Print',cursive;font-size:clamp(36px,8vw,49px);font-weight:400;line-height:1.2}
-.greeting,.signature,.invite strong{font-family:'Caveat','Segoe Print',cursive}.greeting{font-size:23px;font-weight:400}.signature{font-size:21px}.signature strong{font-family:'Nunito',Arial,sans-serif;font-size:13px!important}
-.message{color:#79556a}.hint{color:#9b6a81}.details{border-color:#e6bdcf}.details>div+div{border-color:#e6bdcf}.label,.date{color:#9b6a81}.logo-slot{border-color:#c88daa;color:#ad7390}.back{color:#9b6a81}
+:root {
+  --green: #c77f87;
+  --deep: #97545e;
+  --gold: #c58d76;
+  --cream: #fff8f3;
+  --ink: #714b50;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 20% 10%, #f8ded5, transparent 55%),
+    radial-gradient(ellipse at 90% 90%, #efc7bd, transparent 50%),
+    #fff0e9;
+}
+
+.flap {
+  background: #d9959b;
+}
+
+.seal {
+  background: linear-gradient(135deg, #ffe6ce, #dca18b);
+  border-color: #fff0df;
+}
+
+.card {
+  border-color: #d9ab98;
+}
+
+.card::before {
+  border-color: #ecd0bf;
+}
+
+.greeting,
+.food-mark {
+  color: #b87c66;
+}
 @media(max-width:420px){.greeting{font-size:21px}.card h1{font-size:37px}}
 .invite strong{font-size:24px;font-weight:400}
 
