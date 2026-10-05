@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Багш нарын баярын урилга</title>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:wght@400;600;700&display=swap"
+>
+<style>
+#bg-elements{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}.page{position:relative;z-index:1}.floating{position:absolute;top:105%;opacity:0;animation:floatAnim linear forwards;filter:saturate(.65);user-select:none}@keyframes floatAnim{0%{transform:translateY(0) rotate(-12deg);opacity:0}15%{opacity:.28}80%{opacity:.28}100%{transform:translateY(-125vh) rotate(25deg);opacity:0}}.food-mark{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0;color:var(--gold)}.food-mark svg{width:32px;height:40px}.food-mark span{font-size:16px;letter-spacing:5px}.intro-foot{max-width:340px;margin-left:auto;margin-right:auto;line-height:1.8}.signature strong{font-size:13px!important}
+
+:root{--green:#254e43;--deep:#163c33;--gold:#b18b45;--cream:#faf6ed;--ink:#28453b}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:32px 20px;background:radial-gradient(ellipse at 20% 10%,#e7ecdf,transparent 55%),radial-gradient(ellipse at 90% 90%,#e9ddc6,transparent 50%),#f5f1e7;color:var(--ink);font-family:Arial,sans-serif}button{font:inherit}.page{text-align:center;width:100%}.intro-label,.eyebrow{font-size:11px;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:var(--gold)}.intro-title{font-family:Georgia,serif;font-size:clamp(28px,6vw,40px);font-weight:400;margin:18px 0 60px}.envelope-wrap{position:relative;display:block;width:min(340px,85vw);height:220px;margin:0 auto;border:0;padding:0;background:none;cursor:pointer;perspective:1000px}.envelope{height:100%;background:var(--green);border-radius:5px 5px 12px 12px;box-shadow:0 22px 45px #163c3326;position:relative}.flap{position:absolute;inset:0;background:#346254;clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform .7s;z-index:3}.pocket{position:absolute;inset:0;background:var(--deep);clip-path:polygon(0 0,50% 53%,100% 0,100% 100%,0 100%);border-radius:5px 5px 12px 12px;z-index:2}.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#ecd9a6,#b18b45);border:4px double #f4e7c4;color:var(--deep);z-index:4;font:28px Georgia,serif;transition:opacity .3s}.open .flap{transform:rotateX(180deg)}.open .seal{opacity:0}.hint{font-size:13px;margin-top:28px;color:#66776c}.intro-foot{font-size:12px;letter-spacing:1px;margin-top:45px}.card{position:relative;max-width:510px;margin:auto;padding:36px 38px 30px;background:var(--cream);border:1px solid #c6ab72;box-shadow:0 24px 70px #163c331a;animation:reveal .65s ease both}.card:before{content:"";position:absolute;inset:11px;border:1px solid #d5c5a3;pointer-events:none}.ornament{color:var(--gold);font-size:21px;letter-spacing:10px;margin:12px 0}.logo-slot{height:150px;width:150px;margin:0 auto 20px;display:grid;place-items:center;border:1px dashed #b5a47d;border-radius:50%;color:#8a805f;font-size:10px;letter-spacing:1px;overflow:hidden}.logo-slot img{display:block;max-width:100%;max-height:100%;object-fit:contain}.logo-slot.has-logo{border:0}.card h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(28px,6vw,37px);line-height:1.23;margin:14px 0 12px;color:var(--deep)}.greeting{font-size:15px;font-weight:700;color:var(--gold);margin:0 0 20px}.message{font-size:14px;line-height:1.85;margin:0;color:#53655c}.invite{font-size:15px;line-height:1.8;margin:18px 0 24px}.details{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #d8c8a7;border-bottom:1px solid #d8c8a7;padding:19px 0;gap:12px}.details>div+div{border-left:1px solid #d8c8a7}.label{display:block;font-size:10px;letter-spacing:2px;color:#7b816b;margin-bottom:9px}.value{font-family:Georgia,serif;font-size:30px;color:var(--deep)}.date{font-size:12px;margin-top:7px;color:#747c6c}.signature{font-size:13px;line-height:1.8;margin:22px 0 0}.signature strong{display:block;color:var(--green);font-size:14px}.back{border:0;background:none;color:#748176;font-size:12px;text-decoration:underline;cursor:pointer;margin-top:22px}.page[hidden]{display:none}@keyframes reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}button:focus-visible{outline:3px solid var(--gold);outline-offset:7px}@media(max-width:420px){body{padding:24px 16px}.card{padding:30px 26px 26px}.message,.invite{font-size:13px}.logo-slot{height:120px;width:120px}.intro-title{margin-bottom:48px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}@media print{body{background:white;padding:0}#page1,.back{display:none!important}#page2{display:block!important}.card{box-shadow:none;margin:20px auto}}
+
+/* Ягаан theme — үндсэн өнгийг эндээс өөрчилж болно. */
+:root{--green:#a54e76;--deep:#793552;--gold:#be6c91;--cream:#fff7fa;--ink:#65394e}
+body{background:radial-gradient(ellipse at 20% 10%,#f8dce9,transparent 55%),radial-gradient(ellipse at 90% 90%,#f1c9db,transparent 50%),#fff0f6;font-family:'Nunito',Arial,sans-serif}
+.flap{background:#c5779b}.envelope{box-shadow:0 22px 45px #79355226}.seal{background:linear-gradient(135deg,#fce1ed,#d18cae);border-color:#ffeaf3}
+.card{border-color:#d5a0b8;box-shadow:0 24px 70px #7935521a}.card:before{border-color:#e7bfd1}
+.card h1,.intro-title{font-family:'Caveat','Segoe Print',cursive;font-size:clamp(36px,8vw,49px);font-weight:400;line-height:1.2}
+.greeting,.signature,.invite strong{font-family:'Caveat','Segoe Print',cursive}.greeting{font-size:23px;font-weight:400}.signature{font-size:21px}.signature strong{font-family:'Nunito',Arial,sans-serif;font-size:13px!important}
+.message{color:#79556a}.hint{color:#9b6a81}.details{border-color:#e6bdcf}.details>div+div{border-color:#e6bdcf}.label,.date{color:#9b6a81}.logo-slot{border-color:#c88daa;color:#ad7390}.back{color:#9b6a81}
+@media(max-width:420px){.greeting{font-size:21px}.card h1{font-size:37px}}
+.invite strong{font-size:24px;font-weight:400}
+
+/* Зөвхөн сонгосон дөрвөн хэсэг бичмэл байна. */
+.intro-label,.card h1,.invite strong,.signature strong{font-family: 'Lobster', cursive;font-weight: 400;letter-spacing:0;text-transform:none}
+.intro-label{font-size:32px;color:var(--deep)}
+.card h1{font-size:clamp(38px,8vw,48px);line-height:1.15}
+.invite strong{font-size:22px}
+.signature strong{font-size:26px!important;line-height:1.25;margin-top:8px}
+.greeting,.signature{font-family:'Nunito',Arial,sans-serif;font-size:15px;font-weight:400}
+.greeting{font-weight:600}.signature{font-size:13px}
+@media(max-width:420px){.intro-label{font-size:29px}.card h1{font-size:35px}.signature strong{font-size:16px!important}.greeting{font-size: 16px; font-weight: 1000;}}
+</style>
+</head>
+<body>
+<div id="bg-elements" aria-hidden="true"></div>
+<section id="page1" class="page" aria-label="Урилгын дугтуй">
+<div class="intro-label">Хүндэт багш Танд</div><h1 class="intro-title"></h1>
+<button class="envelope-wrap" id="envelope" type="button" aria-label="Урилгыг нээх"><span class="envelope" style="display:block"><span class="flap"></span><span class="pocket"></span><span class="seal" aria-hidden="true">✦</span></span></button>
+<p class="hint">Дугтуйн дээр дарж урилгаа нээнэ үү</p>
+</section>
+<section id="page2" class="page" hidden aria-label="Багш нарын баярын урилга">
+<article class="card">
+<!-- ЛОГО: Доорх LOGO_SRC утгад зургийн замаа бичээрэй. Жишээ нь "logo.png". -->
+<div class="logo-slot" id="logoSlot"><img id="logo" alt="ХҮТ-ийн лого" hidden><span id="logoPlaceholder">ЛОГО</span></div>
+<!-- <div class="eyebrow">Хүндэт багш нартаа</div> -->
+<h1 id="cardTitle" tabindex="-1">Багш нарын баярын<br>мэнд хүргэе</h1>
+<div class="food-mark" aria-hidden="true"><svg viewBox="0 0 40 52" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 48V8M20 38C6 38 6 29 6 29C17 29 20 38 20 38ZM20 29C6 29 6 20 6 20C17 20 20 29 20 29ZM20 20C7 20 8 11 8 11C17 12 20 20 20 20ZM20 38C34 38 34 29 34 29C23 29 20 38 20 38ZM20 29C34 29 34 20 34 20C23 20 20 29 20 29ZM20 20C33 20 32 11 32 11C23 12 20 20 20 20ZM20 12C12 5 20 1 20 1C28 5 20 12 20 12Z"/></svg><span>✦</span><svg viewBox="0 0 40 52" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 4H27M16 4V21L4 43Q2 48 8 48H32Q38 48 36 43L24 21V4M11 33H29M13 40H13.1M24 37H24.1M27 43H27.1"/></svg></div>
+<p class="greeting">Эрдмийн гэрэл түгээдэг танд баярлалаа.</p>
+<!-- <p class="message">Мэдлэг, ухаан, үнэт сургаалаараа бидний ирээдүйг гэрэлтүүлдэг эрхэм багш нартаа эрүүл энх, аз жаргал, ажлын өндөр амжилтыг хүсэн ерөөе.</p> -->
+<p class="invite">Багш нарын баярыг хамтдаа тэмдэглэхээр<br><strong>Таныг урьж байна.</strong></p>
+<div class="details"><div><span class="label">ХЭЗЭЭ?</span><span class="value">12:30</span><div class="date"><time datetime="2026-10-05T12:30:00+08:00">2026.10.05</time></div></div><div><span class="label">ХААНА?</span><span class="value">128</span><div class="date">дугаар анги</div></div></div>
+<p class="signature">Хүндэтгэсэн:<strong>Хүнс үйлдвэрлэл технологийн<br>4-р түвшний оюутнууд</strong></p>
+</article><button class="back" id="back" type="button">Дугтуй руу буцах</button>
+</section>
+<script>
+// Хүнс, үйлдвэрлэл, технологийг илэрхийлсэн арын хөвдөг дүрсүүд.
+const bg=document.getElementById('bg-elements');
+const floatingIcons=['🌾','🍞','🍎','🍃','⚗️','⚙️','✦'];
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+function createFloatingIcon(){
+ if(reducedMotion.matches||document.hidden)return;
+ const icon=document.createElement('span');icon.className='floating';
+ icon.textContent=floatingIcons[Math.floor(Math.random()*floatingIcons.length)];
+ icon.style.left=(Math.random()*96)+'%';icon.style.fontSize=(18+Math.random()*16)+'px';
+ icon.style.color='#be6c91';icon.style.animationDuration=(12+Math.random()*7)+'s';
+ bg.appendChild(icon);icon.addEventListener('animationend',()=>icon.remove(),{once:true});
+}
+setInterval(createFloatingIcon,850);
+for(let i=0;i<8;i++){createFloatingIcon();if(bg.lastChild)bg.lastChild.style.animationDelay=(-Math.random()*14)+'s'}
+// Лого оруулахдаа зөвхөн энэ мөрийг өөрчилнө. Зургийг HTML файлтай нэг хавтаст байрлуулна.
+const LOGO_SRC = "logo.png"; // Жишээ: "logo.png"
+const logo=document.getElementById('logo');
+if(LOGO_SRC){logo.onload=()=>{logo.hidden=false;document.getElementById('logoPlaceholder').hidden=true;document.getElementById('logoSlot').classList.add('has-logo')};logo.src=LOGO_SRC}
+const envelope=document.getElementById('envelope');let opening=false;
+envelope.addEventListener('click',()=>{if(opening)return;opening=true;envelope.classList.add('open');setTimeout(()=>{document.getElementById('page1').hidden=true;document.getElementById('page2').hidden=false;document.getElementById('cardTitle').focus({preventScroll:true});opening=false},matchMedia('(prefers-reduced-motion: reduce)').matches?0:850)});
+document.getElementById('back').addEventListener('click',()=>{document.getElementById('page2').hidden=true;document.getElementById('page1').hidden=false;envelope.classList.remove('open');envelope.focus()});
+</script>
+</body></html>
