@@ -324,15 +324,6 @@
         color: #8d5d69;
       }
 
-      /*
-      ДАРАА НЬ ЗУРАГ ОРУУЛАХДАА:
-      .photo-placeholder div-ийг img болгож солино.
-
-      Жишээ:
-      <img class="real-photo" src="photo1.jpg" alt="Our photo 1">
-
-      CSS доорх .real-photo хэвээрээ ажиллана.
-    */
       .real-photo {
         width: 100%;
         aspect-ratio: 4 / 5;
@@ -350,7 +341,7 @@
       }
 
       .message p {
-        margin: 0 0 16px;
+        margin: 0 0 10px;
       }
 
       .sorry {
@@ -358,7 +349,7 @@
         border-left: 3px solid #d999a8;
         padding: 14px 16px;
         border-radius: 0 10px 10px 0;
-        margin: 20px 0;
+        margin: 10px 0;
       }
 
       .ending {
@@ -407,6 +398,26 @@
           font-size: 16px;
         }
       }
+
+      .back-btn {
+        display: block;
+        margin: 10px auto 0;
+        border: none;
+        background: transparent;
+        color: #2b2d33;
+        border-radius: 20px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition: 0.25s ease;
+      }
+
+      .back-btn:hover {
+        background: #1a1b20;
+        color: white;
+        border-color: #1a1b20;
+      }
     </style>
   </head>
 
@@ -431,7 +442,7 @@
           <div class="photo-card one">
             <div class="photo-placeholder">
               <div class="icon">♡</div>
-              <img class="real-photo" src="photo1.jpg" alt="Our first photo">
+              <img class="real-photo" src="photo1.jpg" alt="Our first photo" />
             </div>
             <div class="photo-caption">us ♡</div>
           </div>
@@ -439,7 +450,7 @@
           <div class="photo-card two">
             <div class="photo-placeholder">
               <div class="icon">♡</div>
-              <img class="real-photo" src="photo2.jpg" alt="Our second photo">
+              <img class="real-photo" src="photo2.jpg" alt="Our second photo" />
             </div>
             <div class="photo-caption">one of my favorites</div>
           </div>
@@ -449,13 +460,13 @@
           <p>Happy birthday, my dear 🤍</p>
 
           <p>
-            Чамтай найзалж, хамтдаа ийм олон гоё дурсамжтай болсондоо би үнэхээр их
-            баяртай байна.
+            Чамтай найзалж, хамтдаа ийм олон гоё дурсамжтай болсондоо би үнэхээр
+            их баяртай байна.
           </p>
 
           <div class="sorry">
-            Чамайг гомдоож, уурлуулж байсан бол уучлаарай.
-            Би тэр бүр хэлээд байдаггүй ч гэсэн чамдаа үнэхээр их хайртай шүү.
+            Чамайг гомдоож, уурлуулж байсан бол уучлаарай. Би тэр бүр хэлээд
+            байдаггүй ч гэсэн чамдаа үнэхээр их хайртай шүү.
           </div>
 
           <p>
@@ -464,8 +475,8 @@
           </p>
 
           <p>
-            21 нас хүрсэнд чинь баяр хүргэе. Хамгийн гоё гэсэн бүхнийг харж, сонсож аз жаргалтай
-            байгаарай.
+            21 нас хүрсэнд чинь баяр хүргэе. Хамгийн гоё гэсэн бүхнийг харж,
+            сонсож аз жаргалтай байгаарай.
           </p>
         </div>
 
@@ -473,6 +484,9 @@
 
         <div class="tiny-hearts">♡ ♡ ♡</div>
       </main>
+      <button class="back-btn" onclick="backToEnvelope()">
+        ← back to envelope
+      </button>
     </section>
 
     <script>
@@ -509,6 +523,21 @@
             document.body.style.alignItems = "flex-start";
           }, 550);
         }, 700);
+      }
+      function backToEnvelope() {
+        const p1 = document.getElementById("page1");
+        const p2 = document.getElementById("page2");
+        const wrap = document.getElementById("envelope-wrap");
+
+        p2.classList.remove("active");
+
+        p1.style.opacity = "1";
+        p1.style.transform = "translateY(0)";
+        p1.classList.add("active");
+
+        wrap.classList.remove("open");
+
+        document.body.style.alignItems = "center";
       }
     </script>
   </body>
