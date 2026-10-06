@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday 🤍</title>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:wght@400;600;700&display=swap"
+    />
+
+    <style>
+      :root {
+        --pink: #e8a8b6;
+        --deep-pink: #b96b7d;
+        --rose: #8e4b5c;
+        --cream: #fff9f4;
+        --paper: #fffdf9;
+        --ink: #684650;
+        --soft: #f8e7eb;
+        --white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        font-family: Nunito, cursive;
+        background:
+          radial-gradient(
+            circle at 20% 15%,
+            rgba(255, 255, 255, 0.75),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 82% 72%,
+            rgba(255, 255, 255, 0.55),
+            transparent 26%
+          ),
+          linear-gradient(145deg, #eab1bd, #f6d9df 52%, #f3c6d0);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 14px;
+      }
+
+      #bg-elements {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .floating {
+        position: absolute;
+        bottom: -30px;
+        opacity: 0;
+        animation: floatUp linear forwards;
+        color: rgba(255, 255, 255, 0.85);
+        user-select: none;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        15% {
+          opacity: 0.75;
+        }
+        85% {
+          opacity: 0.55;
+        }
+        100% {
+          transform: translateY(-115vh) rotate(300deg);
+          opacity: 0;
+        }
+      }
+
+      .page {
+        display: none;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .page.active {
+        display: flex;
+        animation: pageIn 0.7s ease both;
+      }
+
+      @keyframes pageIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* Envelope */
+      .envelope-wrap {
+        width: min(360px, 84vw);
+        height: 235px;
+        position: relative;
+        cursor: pointer;
+        filter: drop-shadow(0 22px 30px rgba(107, 63, 74, 0.24));
+      }
+
+      .envelope {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--deep-pink);
+        border-radius: 0 0 16px 16px;
+      }
+
+      .flap {
+        position: absolute;
+        inset: 0 0 auto 0;
+        width: 0;
+        height: 0;
+        border-left: min(180px, 42vw) solid transparent;
+        border-right: min(180px, 42vw) solid transparent;
+        border-top: 118px solid #cf8394;
+        transform-origin: top;
+        transition: transform 0.65s ease;
+        z-index: 4;
+      }
+
+      .pocket {
+        position: absolute;
+        inset: 0;
+        background: var(--deep-pink);
+        clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 0 0 16px 16px;
+        z-index: 3;
+      }
+
+      .seal {
+        position: absolute;
+        z-index: 5;
+        top: 38%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 58px;
+        height: 58px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #f8d7df, #d991a1);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        box-shadow: 0 8px 18px rgba(104, 70, 80, 0.25);
+        font-size: 18px;
+        transition: opacity 0.3s ease;
+        animation: pulse 1.9s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        50% {
+          transform: translateX(-50%) scale(1.07);
+        }
+      }
+
+      .envelope-wrap.open .flap {
+        transform: rotateX(180deg);
+        z-index: 1;
+      }
+
+      .envelope-wrap.open .seal {
+        opacity: 0;
+      }
+
+      .open-text {
+        color: rgba(104, 70, 80, 0.85);
+        margin-top: 22px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 600;
+      }
+
+      /* Letter */
+      .letter {
+        width: min(560px, 94vw);
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 31px,
+            rgba(232, 168, 182, 0.13) 32px
+          );
+        background-color: var(--paper);
+        border-radius: 4px;
+        padding: 42px 34px 36px;
+        box-shadow:
+          0 28px 60px rgba(111, 70, 81, 0.18),
+          inset 0 0 0 1px rgba(185, 107, 125, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .letter::before,
+      .letter::after {
+        content: "✿";
+        position: absolute;
+        font-size: 38px;
+        color: rgba(232, 168, 182, 0.36);
+      }
+
+      .letter::before {
+        top: 15px;
+        left: 17px;
+        transform: rotate(-16deg);
+      }
+
+      .letter::after {
+        bottom: 12px;
+        right: 18px;
+        transform: rotate(18deg);
+      }
+
+      .mini-label {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #b7808d;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      h1 {
+        font-family: "Lobster", cursive;
+        font-style: italic;
+        font-size: clamp(30px, 7vw, 44px);
+        color: var(--rose);
+        text-align: center;
+        margin: 0px 0 20px;
+        line-height: 1.05;
+      }
+
+      /* PHOTO PLACEHOLDERS */
+      .photo-row {
+        min-height: 230px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 8px 0 30px;
+        position: relative;
+      }
+
+      .photo-card {
+        position: absolute;
+        width: min(210px, 49vw);
+        background: #fff;
+        padding: 10px 10px 38px;
+        box-shadow: 0 12px 28px rgba(104, 70, 80, 0.17);
+        border-radius: 3px;
+        transition: transform 0.25s ease;
+      }
+
+      .photo-card:hover {
+        z-index: 10;
+        transform: rotate(0deg) scale(1.04);
+      }
+
+      .photo-card.one {
+        left: 5%;
+        transform: rotate(-7deg);
+      }
+
+      .photo-card.two {
+        right: 5%;
+        transform: rotate(7deg);
+      }
+
+      .photo-placeholder {
+        aspect-ratio: 4 / 5;
+        width: 100%;
+        border: 2px dashed #e0a8b5;
+        background: linear-gradient(
+          135deg,
+          rgba(246, 217, 223, 0.75),
+          rgba(255, 249, 244, 0.92)
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #a86d7b;
+        font-size: 13px;
+        padding: 12px;
+        overflow: hidden;
+      }
+
+      .photo-placeholder .icon {
+        font-size: 29px;
+        opacity: 0.75;
+      }
+
+      .photo-caption {
+        font-family: Nunito, cursive;
+        font-size: 18px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 8px;
+        text-align: center;
+        color: #8d5d69;
+      }
+
+      /*
+      ДАРАА НЬ ЗУРАГ ОРУУЛАХДАА:
+      .photo-placeholder div-ийг img болгож солино.
+
+      Жишээ:
+      <img class="real-photo" src="photo1.jpg" alt="Our photo 1">
+
+      CSS доорх .real-photo хэвээрээ ажиллана.
+    */
+      .real-photo {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        display: block;
+      }
+
+      .message {
+        font-family: Lobster, cursive;
+        font-size: clamp(20px, 5vw, 25px);
+        line-height: 1.45;
+        color: #76505b;
+        text-align: left;
+        padding: 0 4px;
+      }
+
+      .message p {
+        margin: 0 0 16px;
+      }
+
+      .sorry {
+        background: rgba(248, 231, 235, 0.72);
+        border-left: 3px solid #d999a8;
+        padding: 14px 16px;
+        border-radius: 0 10px 10px 0;
+        margin: 20px 0;
+      }
+
+      .ending {
+        text-align: right;
+        font-family: Lobster, cursive;
+        font-size: 18px;
+        color: var(--rose);
+      }
+
+      .tiny-hearts {
+        text-align: center;
+        margin-top: 2px;
+        letter-spacing: 8px;
+        color: #d697a6;
+        font-size: 14px;
+      }
+
+      @media (max-width: 520px) {
+        .letter {
+          padding: 34px 20px 28px;
+        }
+
+        .photo-row {
+          min-height: 205px;
+          margin-bottom: 24px;
+        }
+
+        .photo-card {
+          width: 47%;
+          padding: 7px 7px 30px;
+        }
+
+        .photo-card.one {
+          left: 4%;
+        }
+        .photo-card.two {
+          right: 4%;
+        }
+
+        .photo-caption {
+          font-size: 15px;
+          bottom: 6px;
+        }
+
+        .message {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="bg-elements"></div>
+
+    <section id="page1" class="page active">
+      <div class="envelope-wrap" id="envelope-wrap" onclick="openEnvelope()">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="seal">♡</div>
+        </div>
+      </div>
+      <div class="open-text">open me ♡</div>
+    </section>
+
+    <section id="page2" class="page">
+      <main class="letter">
+        <h1>Happy Birthday</h1>
+        <div class="photo-row">
+          <div class="photo-card one">
+            <div class="photo-placeholder">
+              <div class="icon">♡</div>
+              <img class="real-photo" src="photo1.jpg" alt="Our first photo">
+            </div>
+            <div class="photo-caption">us ♡</div>
+          </div>
+
+          <div class="photo-card two">
+            <div class="photo-placeholder">
+              <div class="icon">♡</div>
+              <img class="real-photo" src="photo2.jpg" alt="Our second photo">
+            </div>
+            <div class="photo-caption">one of my favorites</div>
+          </div>
+        </div>
+
+        <div class="message">
+          <p>Happy birthday, my dear 🤍</p>
+
+          <p>
+            Чамтай найзалж, хамтдаа ийм олон гоё дурсамжтай болсондоо би үнэхээр их
+            баяртай байна.
+          </p>
+
+          <div class="sorry">
+            Чамайг гомдоож, уурлуулж байсан бол уучлаарай.
+            Би тэр бүр хэлээд байдаггүй ч гэсэн чамдаа үнэхээр их хайртай шүү.
+          </div>
+
+          <p>
+            Цаашдаа ч гэсэн хамт зөндөө их инээж, зөндөө гоё дурсамж бүтээнэ гэж
+            найдаж байна.
+          </p>
+
+          <p>
+            21 нас хүрсэнд чинь баяр хүргэе. Хамгийн гоё гэсэн бүхнийг харж, сонсож аз жаргалтай
+            байгаарай.
+          </p>
+        </div>
+
+        <div class="ending">Love you, Soko ♡</div>
+
+        <div class="tiny-hearts">♡ ♡ ♡</div>
+      </main>
+    </section>
+
+    <script>
+      const bg = document.getElementById("bg-elements");
+      const shapes = ["♡", "✦", "·"];
+
+      function createFloatingElement() {
+        const el = document.createElement("div");
+        el.className = "floating";
+        el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.fontSize = Math.random() * 14 + 10 + "px";
+        const duration = Math.random() * 5 + 7;
+        el.style.animationDuration = duration + "s";
+        bg.appendChild(el);
+        setTimeout(() => el.remove(), duration * 1000);
+      }
+
+      setInterval(createFloatingElement, 350);
+
+      function openEnvelope() {
+        const wrap = document.getElementById("envelope-wrap");
+        wrap.classList.add("open");
+
+        setTimeout(() => {
+          const p1 = document.getElementById("page1");
+          p1.style.transition = "opacity .55s ease, transform .55s ease";
+          p1.style.opacity = "0";
+          p1.style.transform = "translateY(-16px)";
+
+          setTimeout(() => {
+            p1.classList.remove("active");
+            document.getElementById("page2").classList.add("active");
+            document.body.style.alignItems = "flex-start";
+          }, 550);
+        }, 700);
+      }
+    </script>
+  </body>
+</html>
