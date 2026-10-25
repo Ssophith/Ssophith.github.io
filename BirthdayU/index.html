@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A little sunshine for you ☀</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --butter: #f9df91;
+        --sun: #f3c963;
+        --gold: #c79b41;
+        --cream: #fffaf0;
+        --paper: #fffdf7;
+        --ink: #776044;
+        --muted: #a28d70;
+        --line: #efdfba;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "DM Sans", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 12%, #fffef9 0, transparent 34%),
+          radial-gradient(circle at 86% 75%, #fff6d5 0, transparent 40%),
+          linear-gradient(150deg, #fff5d6, #ffedbc 52%, #fff8e7);
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        opacity: 0.3;
+        pointer-events: none;
+        background-image: radial-gradient(#d8b866 0.75px, transparent 0.75px);
+        background-size: 19px 19px;
+      }
+      .glow {
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        filter: blur(8px);
+        opacity: 0.48;
+      }
+      .glow.one {
+        width: 290px;
+        height: 290px;
+        top: -110px;
+        right: -80px;
+        background: #ffe6a0;
+      }
+      .glow.two {
+        width: 220px;
+        height: 220px;
+        bottom: -80px;
+        left: -80px;
+        background: #fff8dc;
+      }
+      #sparkles {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .spark {
+        position: absolute;
+        bottom: -30px;
+        color: #e2bb60;
+        opacity: 0;
+        animation: rise linear forwards;
+      }
+      @keyframes rise {
+        0% {
+          transform: translateY(0) rotate(0);
+          opacity: 0;
+        }
+        15% {
+          opacity: 0.55;
+        }
+        85% {
+          opacity: 0.45;
+        }
+        100% {
+          transform: translateY(-110vh) rotate(70deg);
+          opacity: 0;
+        }
+      }
+      .page {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: none;
+        padding: 42px 16px 65px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .page.active {
+        display: flex;
+        animation: appear 0.7s ease both;
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3.6px;
+        text-transform: uppercase;
+        color: #ad8c4d;
+        text-align: center;
+      }
+      .welcome-title {
+        font:
+          italic 500 clamp(32px, 7vw, 47px)/1.15 "Playfair Display",
+          serif;
+        text-align: center;
+        margin: 14px 0 34px;
+      }
+      .envelope-wrap {
+        width: min(365px, 84vw);
+        height: 235px;
+        position: relative;
+        cursor: pointer;
+        perspective: 900px;
+        filter: drop-shadow(0 22px 27px #ad8b4d48);
+        transition: transform 0.25s;
+      }
+      .envelope-wrap:hover {
+        transform: translateY(-5px);
+      }
+      .envelope {
+        width: 100%;
+        height: 100%;
+        border-radius: 0 0 13px 13px;
+        background: #eac475;
+        position: relative;
+      }
+      .letter-peek {
+        position: absolute;
+        width: 84%;
+        height: 77%;
+        left: 8%;
+        top: 9%;
+        border-radius: 8px 8px 3px 3px;
+        background: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font:
+          italic 500 24px "Playfair Display",
+          serif;
+        color: #c69c50;
+        transition: transform 0.6s ease;
+      }
+      .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 56%;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        background: #f8dda0;
+        transform-origin: top center;
+        transition: transform 0.7s ease;
+        z-index: 4;
+      }
+      .pocket {
+        position: absolute;
+        inset: 0;
+        background: #f0cf88;
+        clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 0 0 13px 13px;
+        z-index: 3;
+      }
+      .pocket::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #e5b961;
+        clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+        opacity: 0.6;
+      }
+      .seal {
+        position: absolute;
+        z-index: 5;
+        top: 39%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fff3c9, #e2b65a);
+        border: 2px solid #fff8df;
+        box-shadow: 0 5px 13px #9d762a40;
+        color: #fff;
+        font-size: 26px;
+        transition: opacity 0.25s;
+      }
+      .envelope-wrap.open .flap {
+        transform: rotateX(180deg);
+        z-index: 1;
+      }
+      .envelope-wrap.open .seal {
+        opacity: 0;
+      }
+      .envelope-wrap.open .letter-peek {
+        transform: translateY(-60px);
+      }
+      .open-hint {
+        font-size: 11px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-top: 33px;
+        font-weight: 700;
+        color: #a98b56;
+      }
+      .letter {
+        position: relative;
+        width: min(590px, 100%);
+        background: var(--paper);
+        border: 1px solid #f5e6c4;
+        border-radius: 18px;
+        padding: 42px clamp(20px, 6vw, 46px) 38px;
+        box-shadow:
+          0 25px 75px #9874372b,
+          0 3px 14px #94702e13;
+      }
+      .letter::before {
+        content: "";
+        position: absolute;
+        inset: 9px;
+        border: 1px solid #eedfbf;
+        border-radius: 12px;
+        pointer-events: none;
+      }
+      .letter-top {
+        text-align: center;
+        position: relative;
+      }
+      .sun {
+        font-size: 26px;
+        display: block;
+        margin-bottom: 11px;
+        color: #d6a84d;
+      }
+      h1 {
+        font:
+          italic 600 clamp(33px, 7vw, 49px)/1.15 "Playfair Display",
+          serif;
+        color: #b88a3c;
+        letter-spacing: -1.5px;
+        margin: 12px 0 8px;
+      }
+      .subtitle {
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 1.4px;
+        margin: 0 0 28px;
+      }
+      .photos {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(8px, 3vw, 21px);
+        margin: 0 auto 31px;
+        max-width: 465px;
+      }
+      .photo {
+        background: #fff;
+        padding: 9px 9px 28px;
+        box-shadow: 0 11px 25px #826b4640;
+        border: 1px solid #efe3c9;
+        width: 48%;
+        max-width: 215px;
+        transition: transform 0.2s;
+      }
+      .photo:first-child {
+        transform: rotate(-5deg) translateY(5px);
+      }
+      .photo:last-child {
+        transform: rotate(5deg) translateY(-5px);
+      }
+      .photo:first-child:hover,
+      .photo:last-child:hover {
+        transform: rotate(0) scale(1.04);
+        z-index: 2;
+      }
+      .photo-frame {
+        width: 100%;
+        aspect-ratio: 4/5;
+        background: linear-gradient(150deg, #fff4d3, #f7deb0);
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        inset: 0;
+      }
+      .photo-frame .placeholder {
+        text-align: center;
+        color: #bfa166;
+        padding: 10px;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+      .placeholder .symbol {
+        display: block;
+        font-size: 27px;
+      }
+      .photo-caption {
+        font:
+          italic 500 clamp(11px, 3vw, 15px) "Playfair Display",
+          serif;
+        text-align: center;
+        position: relative;
+        top: 8px;
+        color: #9e7b47;
+      }
+      .rule {
+        width: 85px;
+        height: 1px;
+        background: #dfc68e;
+        margin: 0 auto 24px;
+        position: relative;
+      }
+      .rule::after {
+        content: "✦";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--paper);
+        padding: 0 8px;
+        color: #c9a04c;
+        font-size: 13px;
+      }
+      .message {
+        font-size: 15px;
+        line-height: 1.9;
+        letter-spacing: 0.05px;
+        color: #75634c;
+        position: relative;
+      }
+      .message p {
+        margin: 0 0 17px;
+      }
+      .message .greeting {
+        font:
+          italic 600 22px "Playfair Display",
+          serif;
+        color: #b38a43;
+      }
+      .sorry {
+        padding: 15px 19px;
+        margin: 19px 0 20px;
+        background: #fff5dc;
+        border-left: 3px solid #e2bc68;
+        border-radius: 0 10px 10px 0;
+      }
+      .ending {
+        text-align: right;
+        font:
+          italic 500 22px "Playfair Display",
+          serif;
+        color: #b18a49;
+        margin-top: 28px;
+      }
+      .footer-sun {
+        text-align: center;
+        margin-top: 24px;
+        color: #d3aa55;
+        letter-spacing: 8px;
+      }
+      .back-btn {
+        border: 1px solid #d7b56f;
+        background: #fffaf0a6;
+        color: #98773f;
+        border-radius: 999px;
+        margin: 28px auto 0;
+        padding: 12px 24px;
+        font:
+          600 12px "DM Sans",
+          sans-serif;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .back-btn:hover {
+        background: #eac979;
+        color: #66502a;
+      }
+      @media (max-width: 480px) {
+        .page {
+          padding: 25px 13px 45px;
+        }
+        .letter {
+          padding: 32px 21px 28px;
+        }
+        .photos {
+          gap: 8px;
+        }
+        .photo {
+          padding: 6px 6px 24px;
+        }
+        .message {
+          font-size: 14px;
+          line-height: 1.8;
+        }
+        .sorry {
+          padding: 12px 14px;
+        }
+        .subtitle {
+          font-size: 10px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* A soft, happy cream + pastel yellow refresh. Envelope structure and opening code unchanged. */
+      body {
+        background:
+          radial-gradient(circle at 12% 10%, #fffefa 0, transparent 35%),
+          radial-gradient(circle at 90% 82%, #fffef5 0, transparent 34%),
+          linear-gradient(145deg, #fffdf1, #fff8cf 55%, #fffdf0);
+        color: #655d43;
+      }
+      body::before {
+        background-image: radial-gradient(#f0e9bc 0.7px, transparent 0.7px);
+        opacity: 0.19;
+      }
+      .glow.one {
+        background: #fff8c7;
+        opacity: 0.4;
+      }
+      .glow.two {
+        background: #fffde6;
+        opacity: 0.52;
+      }
+      .spark {
+        color: #dfd48c;
+      }
+      .eyebrow,
+      .open-hint {
+        color: #918653;
+      }
+      .welcome-title {
+        color: #777047;
+      }
+      .friendship-letter {
+        max-width: 670px;
+        border: 0;
+        border-radius: 26px;
+        background: #fffef9;
+        padding: 44px clamp(22px, 6vw, 52px) 35px;
+        box-shadow:
+          0 20px 65px rgba(123, 117, 72, 0.13),
+          0 3px 12px rgba(123, 117, 72, 0.06);
+        overflow: hidden;
+      }
+      .friendship-letter::before {
+        inset: 13px;
+        border: 1px solid #f0eed8;
+        border-radius: 19px;
+      }
+      .friendship-letter::after {
+        content: "✳";
+        position: absolute;
+        top: -19px;
+        right: 22px;
+        font-size: 90px;
+        color: #f9efad;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+      .friendship-letter .letter-top {
+        z-index: 1;
+      }
+      .kicker {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: #a7a062;
+        background: #fbf6d9;
+        padding: 9px 15px;
+        border-radius: 100px;
+      }
+      .friendship-letter h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(33px, 7vw, 49px);
+        font-weight: 600;
+        font-style: italic;
+        color: #77734b;
+        margin: 0px 0 10px;
+        letter-spacing: -1px;
+      }
+      .friendship-letter .subtitle {
+        font-size: 13px;
+        letter-spacing: 0;
+        color: #9a936e;
+        line-height: 1.6;
+        margin-bottom: 26px;
+      }
+      .memory-board {
+        position: relative;
+        background: #fffbe6;
+        border: 1px solid #f3efcf;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(10px, 4vw, 30px);
+        padding: 27px 23px 29px;
+        margin-bottom: 28px;
+      }
+      .memory-board::before,
+      .memory-board::after {
+        content: "✳";
+        position: absolute;
+        color: #e6e4a9;
+        font-size: 19px;
+      }
+      .memory-board::before {
+        top: 7px;
+        left: 14px;
+      }
+      .memory-board::after {
+        bottom: 5px;
+        right: 15px;
+      }
+      .memory-board .photo {
+        width: 45%;
+        max-width: 215px;
+        position: relative;
+        background: white;
+        border: 0;
+        padding: 8px 8px 28px;
+        box-shadow: 0 8px 17px rgba(101, 102, 71, 0.14);
+        border-radius: 3px;
+      }
+      .memory-board .photo-a {
+        transform: rotate(-5deg) translateY(7px);
+      }
+      .memory-board .photo-b {
+        transform: rotate(4deg) translateY(-6px);
+      }
+      .memory-board .photo:hover {
+        transform: rotate(0deg) scale(1.03);
+        z-index: 3;
+      }
+      .memory-board .photo-frame {
+        background: linear-gradient(145deg, #fffae9, #f3f0ce);
+      }
+      .memory-board .placeholder {
+        color: #a29c73;
+      }
+      .memory-board .photo-caption {
+        font-family: "DM Sans", sans-serif;
+        color: #8c8662;
+        font-size: clamp(9px, 2.4vw, 12px);
+        font-weight: 600;
+        font-style: normal;
+        top: 8px;
+      }
+      .between-photos {
+        position: absolute;
+        z-index: 2;
+        color: #ded487;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+        text-shadow: 0 2px 5px #fff;
+      }
+      .letter-message {
+        position: relative;
+        font-size: 15px;
+        line-height: 1.95;
+        color: #68634e;
+      }
+      .letter-message .greeting-line {
+        font-size: 19px;
+        font-weight: 700;
+        color: #77754e;
+        margin: 0 0 17px;
+      }
+      .greeting-line span {
+        color: #c9bd79;
+      }
+      /* .letter-message p {
+        margin: 0 0 17px;
+      } */
+      .letter-message strong {
+        color: #6f7048;
+        font-weight: 700;
+      }
+      .sweet-note {
+        position: relative;
+        background: #fff9dc;
+        border-radius: 15px;
+        padding: 16px 20px;
+        margin: 22px 0;
+        font-weight: 700;
+        color: #77764e;
+        border: 1px solid #f7efc7;
+        text-align: center;
+        line-height: 1.7;
+      }
+      .signature {
+        margin-top: 0px;
+        text-align: right;
+        line-height: 1.55;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        color: #85805a;
+        font-size: 19px;
+      }
+      .signature strong {
+        font-size: 23px;
+      }
+      .closing-doodles {
+        margin-top: 29px;
+        text-align: center;
+        color: #b5ae72;
+        font-size: 17px;
+      }
+      .closing-doodles span {
+        font-size: 10px;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+        padding: 0 8px;
+        color: #a8a47c;
+      }
+      .back-btn {
+        border: 1px solid #e5dfb5;
+        background: #fffdf2;
+        color: #8a855c;
+      }
+      .back-btn:hover {
+        background: #f8f2d0;
+        color: #656142;
+      }
+      @media (max-width: 480px) {
+        .friendship-letter {
+          padding: 35px 21px 28px;
+        }
+        .memory-board {
+          padding: 22px 10px 24px;
+          gap: 10px;
+        }
+        .memory-board .photo {
+          width: 46%;
+          padding: 6px 6px 25px;
+        }
+        .letter-message {
+          font-size: 14px;
+          line-height: 1.85;
+        }
+        .friendship-letter .subtitle {
+          font-size: 12px;
+        }
+        .kicker {
+          font-size: 9px;
+          letter-spacing: 2px;
+        }
+        .closing-doodles span {
+          letter-spacing: 0.7px;
+        }
+      }
+
+      /* Requested palette: teal #4aa5ad, sunny yellow #fbc33f, cream #fcedcb.
+       Envelope dimensions and typography deliberately left unchanged. */
+      :root {
+        --butter: #fbc33f;
+        --sun: #fbc33f;
+        --gold: #fbc33f;
+        --cream: #fcedcb;
+        --paper: #fffdf7;
+        --ink: #285d62;
+        --muted: #598b90;
+        --line: #fcedcb;
+      }
+      body {
+        background:
+          radial-gradient(circle at 18% 12%, #fffdf7 0%, transparent 39%),
+          radial-gradient(circle at 84% 80%, #fcedcb 0%, transparent 40%),
+          linear-gradient(145deg, #fcedcb, #fffaf0 55%, #fcedcb);
+        color: #285d62;
+      }
+      body::before {
+        background-image: radial-gradient(#4aa5ad 0.65px, transparent 0.65px);
+        opacity: 0.11;
+      }
+      .glow.one {
+        background: #fbc33f;
+        opacity: 0.18;
+      }
+      .glow.two {
+        background: #4aa5ad;
+        opacity: 0.12;
+      }
+      .spark {
+        color: #4aa5ad;
+      }
+      .eyebrow,
+      .open-hint {
+        color: #4a8f96;
+      }
+      .welcome-title {
+        color: #277e86;
+      }
+      /* Explicitly separate the pages to prevent the opened letter appearing behind the envelope. */
+      #page1 {
+        z-index: 1;
+      }
+      #page2 {
+        z-index: 10;
+        isolation: isolate;
+      }
+      #page2.active {
+        display: flex;
+        position: relative;
+        z-index: 10;
+      }
+      #page1:not(.active),
+      #page2:not(.active) {
+        display: none !important;
+      }
+      #page2 .friendship-letter {
+        z-index: 2;
+      }
+      .friendship-letter {
+        background: #fffefa;
+        border: 1px solid #fcedcb;
+        box-shadow: 0 18px 60px rgba(42, 112, 118, 0.12);
+      }
+      .friendship-letter::before {
+        border-color: #fcedcb;
+      }
+      .friendship-letter::after {
+        color: #fbc33f;
+        opacity: 0.24;
+      }
+      .kicker {
+        color: #278c95;
+        background: #fcedcb;
+      }
+      .friendship-letter h1 {
+        color: #2b8f97;
+      }
+      .friendship-letter .subtitle {
+        color: #558f94;
+      }
+      .memory-board {
+        background: #fcedcb;
+        border-color: #f6d993;
+      }
+      .memory-board::before,
+      .memory-board::after {
+        color: #fbc33f;
+      }
+      .memory-board .photo {
+        box-shadow: 0 9px 19px rgba(41, 121, 128, 0.14);
+      }
+      .memory-board .photo-frame {
+        background: linear-gradient(145deg, #fffdf6, #fcedcb);
+      }
+      .memory-board .placeholder,
+      .memory-board .photo-caption {
+        color: #3e9199;
+      }
+      .between-photos {
+        color: #fbc33f;
+      }
+      .letter-message {
+        color: #365d60;
+      }
+      .letter-message .greeting-line,
+      .letter-message strong {
+        color: #298b93;
+      }
+      .greeting-line span {
+        color: #f0b82c;
+      }
+      .sweet-note {
+        background: #fcedcb;
+        border-color: #f5dc9e;
+        color: #287e87;
+      }
+      .signature {
+        color: #368d94;
+      }
+      .closing-doodles {
+        color: #f4bd32;
+      }
+      .closing-doodles span {
+        color: #368d94;
+      }
+      .back-btn {
+        border-color: #4aa5ad;
+        background: #fffdf6;
+        color: #287e87;
+      }
+      .back-btn:hover {
+        background: #4aa5ad;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div id="sparkles"></div>
+    <section class="page active" id="page1">
+      <div class="welcome-title">For my sunshine</div>
+      <div
+        class="envelope-wrap"
+        id="envelope-wrap"
+        role="button"
+        tabindex="0"
+        aria-label="Захидлыг нээх"
+        onclick="openEnvelope()"
+        onkeydown="
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openEnvelope();
+          }
+        "
+      >
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="seal">☀</div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="page2">
+      <main class="letter friendship-letter">
+        <div class="letter-top">
+          <h1>Happy Birthday</h1>
+        </div>
+        <div class="memory-board" aria-label="Бидний хоёр зураг">
+          <div class="photo photo-a">
+            <div class="photo-frame">
+              <div class="placeholder">
+                <span class="symbol">✿</span>Эхний дурсамжийн<br />зураг
+              </div>
+              <img
+                src="photo1.jpeg"
+                alt="Бидний эхний зураг"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+          </div>
+          <span class="between-photos">♡</span>
+          <div class="photo photo-b">
+            <div class="photo-frame">
+              <div class="placeholder">
+                <span class="symbol">☼</span>Хоёр дахь<br />зураг
+              </div>
+              <img
+                src="photo2.jpeg"
+                alt="Бидний хоёр дахь зураг"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="letter-message">
+          <p>
+            Чамдаа төрсөн өдрийн мэнд хүргэе. Чи минь үргэлж инээж, эргэн
+            тойрныхоо хүмүүсийг аз жаргалтай болгодог, хамт байхад хамгийн
+            энгийн өдөр хүртэл хөгжилтэй дурсамж болоод үлддэг, юу ч хийхгүй
+            зүгээр л уулзаад янз бүрийн юм яримаар санагддаг миний хамгийн
+            нандин найз юм шүү.
+          </p>
+          <div class="sweet-note">
+            Цаашдаа ч гэсэн хамт зөндөө их инээж, зөндөө гоё дурсамж бүтээнэ гэж
+            найдаж байна.
+          </div>
+
+          <p>
+            21 нас хүрсэнд чинь баяр хүргэе. Хамгийн гоё гэсэн бүхнийг харж,
+            сонсож аз жаргалтай байгаарай.
+          </p>
+
+          <div class="signature"><strong>Soko ♡</strong></div>
+        </div>
+      </main>
+      <button class="back-btn" onclick="backToEnvelope()">
+        ← back to envelope
+      </button>
+    </section>
+    <script>
+      "use strict";
+      const bg = document.getElementById("sparkles");
+      const shapes = ["✦", "·", "✧"];
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setInterval(() => {
+          if (document.hidden || bg.childElementCount > 30) return;
+          const el = document.createElement("span");
+          el.className = "spark";
+          el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+          el.style.left = `${Math.random() * 100}vw`;
+          el.style.fontSize = `${Math.random() * 12 + 8}px`;
+          const duration = Math.random() * 5 + 8;
+          el.style.animationDuration = `${duration}s`;
+          bg.appendChild(el);
+          setTimeout(() => el.remove(), duration * 1000);
+        }, 650);
+      }
+      let isOpening = false;
+      let openTimer = null;
+      function openEnvelope() {
+        if (
+          isOpening ||
+          document.getElementById("page2").classList.contains("active")
+        )
+          return;
+        isOpening = true;
+        const envelope = document.getElementById("envelope-wrap");
+        const page1 = document.getElementById("page1");
+        const page2 = document.getElementById("page2");
+        envelope.classList.add("open");
+        clearTimeout(openTimer);
+        openTimer = setTimeout(() => {
+          // Remove the envelope from layout BEFORE displaying the letter.
+          page1.classList.remove("active");
+          page1.setAttribute("aria-hidden", "true");
+          page2.classList.add("active");
+          page2.removeAttribute("aria-hidden");
+          window.scrollTo({ top: 0, behavior: "instant" });
+          isOpening = false;
+        }, 1000);
+      }
+      function backToEnvelope() {
+        clearTimeout(openTimer);
+        isOpening = false;
+        const page1 = document.getElementById("page1");
+        const page2 = document.getElementById("page2");
+        page2.classList.remove("active");
+        page2.setAttribute("aria-hidden", "true");
+        page1.classList.add("active");
+        page1.removeAttribute("aria-hidden");
+        document.getElementById("envelope-wrap").classList.remove("open");
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    </script>
+  </body>
+</html>
