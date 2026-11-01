@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To my favorite human ♡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --burgundy: #641d37;
+        --wine: #431326;
+        --pink: #e6a0bd;
+        --light-pink: #f9dce8;
+        --pale: #fff4f7;
+        --ink: #52223a;
+        --white: #fffafc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "DM Sans", sans-serif;
+        background: #54182f;
+        color: var(--ink);
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.7;
+        background:
+          radial-gradient(circle at 10% 15%, #a543694d, transparent 27%),
+          radial-gradient(circle at 90% 85%, #e4a3bd2b, transparent 28%);
+      }
+      .page {
+        min-height: 100vh;
+        padding: 28px 16px 50px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+      }
+      .page.active {
+        display: flex;
+        animation: fadeIn 0.55s ease both;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      /* Same dimensions and fonts as the previously supplied envelope. */
+      .envelope-wrap {
+        width: min(365px, 84vw);
+        height: 235px;
+        position: relative;
+        cursor: pointer;
+        perspective: 900px;
+        filter: drop-shadow(0 22px 27px #23081174);
+        transition: transform 0.25s;
+      }
+      .envelope-wrap:hover {
+        transform: translateY(-5px);
+      }
+      .envelope {
+        width: 100%;
+        height: 100%;
+        border-radius: 0 0 13px 13px;
+        background: #b75579;
+        position: relative;
+      }
+      .letter-peek {
+        position: absolute;
+        width: 84%;
+        height: 77%;
+        left: 8%;
+        top: 9%;
+        border-radius: 8px 8px 3px 3px;
+        background: var(--pale);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font:
+          italic 500 24px "Playfair Display",
+          serif;
+        color: #812d50;
+        transition: transform 0.6s ease;
+        z-index: 2;
+      }
+      .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 56%;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        background: #e3a1bb;
+        transform-origin: top center;
+        transition: transform 0.7s ease;
+        z-index: 5;
+        backface-visibility: hidden;
+      }
+      .pocket {
+        position: absolute;
+        inset: 0;
+        background: #bc6282;
+        clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 0 0 13px 13px;
+        z-index: 4;
+      }
+      .pocket::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #8b3454;
+        clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+        opacity: 0.65;
+      }
+      .seal {
+        position: absolute;
+        z-index: 6;
+        top: 39%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #ffdbe9, #ba5c80);
+        border: 2px solid #ffeaf1;
+        box-shadow: 0 5px 13px #571a3040;
+        color: #fff;
+        font-size: 26px;
+        transition: opacity 0.25s;
+      }
+      .envelope-wrap.open .flap {
+        transform: rotateX(180deg);
+        z-index: 1;
+      }
+      .envelope-wrap.open .seal {
+        opacity: 0;
+      }
+      .envelope-wrap.open .letter-peek {
+        transform: translateY(-60px);
+      }
+      .open-hint {
+        margin-top: 36px;
+        color: #f9d6e5;
+        letter-spacing: 2.4px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      /* Completely new magazine / scrapbook layout: not a letter card, no Polaroids. */
+      #page2 {
+        justify-content: flex-start;
+        padding-top: 36px;
+      }
+      #page1:not(.active),
+      #page2:not(.active) {
+        display: none !important;
+      }
+      #page2.active {
+        z-index: 10;
+        isolation: isolate;
+      }
+      .magazine {
+        width: min(920px, 100%);
+        background: var(--pale);
+        position: relative;
+        border-radius: 3px;
+        overflow: hidden;
+        box-shadow: 0 35px 95px #21081275;
+        border: 7px solid #f3c7d8;
+      }
+      .masthead {
+        background: var(--burgundy);
+        color: #fff7fa;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 17px 32px;
+        font-size: 11px;
+        letter-spacing: 2.1px;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      .masthead .edition {
+        color: #fac9db;
+      }
+      .hero {
+        padding: 35px 42px 26px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 16px;
+        border-bottom: 2px solid var(--burgundy);
+      }
+      .hero .eyebrow {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 800;
+        color: #a04b6b;
+      }
+      .hero h1 {
+        font:
+          italic 600 clamp(44px, 7.7vw, 83px)/0.95 "Playfair Display",
+          serif;
+        color: var(--burgundy);
+        letter-spacing: -2.6px;
+        margin: 10px 0 2px;
+      }
+      .hero .mark {
+        font:
+          italic 500 clamp(42px, 8vw, 84px)/1 "Playfair Display",
+          serif;
+        color: #ce779a;
+        align-self: center;
+      }
+      .hero .sub {
+        font-size: 14px;
+        color: #9b5773;
+        margin: 14px 0 0;
+      }
+      .feature {
+        display: grid;
+        grid-template-columns: 1.13fr 0.87fr;
+        gap: 0;
+        min-height: 330px;
+      }
+      .feature-image {
+        position: relative;
+        min-height: 315px;
+        background: #dfa5bb;
+        overflow: hidden;
+      }
+      .feature-image img,
+      .second-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        inset: 0;
+      }
+      .image-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #76304d;
+        background: linear-gradient(145deg, #e9b3c8, #f8dbe5);
+        font-weight: 700;
+        font-size: 13px;
+        text-align: center;
+        padding: 20px;
+      }
+      .image-placeholder span {
+        font:
+          italic 500 38px "Playfair Display",
+          serif;
+      }
+      .feature-image:has(img:not([hidden])) .image-placeholder,
+      .second-photo:has(img:not([hidden])) .image-placeholder {
+        display: none;
+      }
+      .image-tag {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        background: #fff6f9;
+        color: var(--wine);
+        padding: 9px 15px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        z-index: 1;
+      }
+      .feature-quote {
+        background: #f0bfd1;
+        padding: 32px clamp(20px, 4vw, 44px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+      .feature-quote::before {
+        content: "“";
+        font:
+          500 120px/1 Georgia,
+          serif;
+        color: #be658b;
+        position: absolute;
+        top: 0;
+        left: 24px;
+        opacity: 0.3;
+      }
+      .feature-quote .small {
+        position: relative;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #813953;
+        font-weight: 800;
+      }
+      .feature-quote p {
+        position: relative;
+        font:
+          italic 500 clamp(26px, 3.8vw, 42px)/1.2 "Playfair Display",
+          serif;
+        color: #5c1b36;
+        margin: 16px 0;
+      }
+      .feature-quote .tiny {
+        position: relative;
+        color: #864762;
+        font-size: 13px;
+      }
+      .story {
+        display: grid;
+        grid-template-columns: 1fr 245px;
+        gap: 34px;
+        padding: 38px 42px 34px;
+        background: #fff8fb;
+      }
+      .story .label {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2.3px;
+        color: #b25d7e;
+        text-transform: uppercase;
+      }
+      .story h2 {
+        font:
+          italic 600 31px "Playfair Display",
+          serif;
+        color: var(--burgundy);
+        margin: 11px 0 20px;
+      }
+      .story p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #653249;
+        margin: 0 0 17px;
+      }
+      .story strong {
+        color: #8c3459;
+      }
+      .side {
+        border-left: 2px solid #f1c2d4;
+        padding-left: 25px;
+      }
+      .second-photo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3/4;
+        background: #e7acc4;
+        overflow: hidden;
+        border-radius: 110px 110px 3px 3px;
+      }
+      .side .caption {
+        font:
+          italic 500 16px "Playfair Display",
+          serif;
+        color: #923f61;
+      }
+      .side .tiny-note {
+        text-align: center;
+        color: #b15f7f;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-top: 8px;
+      }
+      .footer {
+        background: #661d38;
+        color: #fff2f7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 31px;
+        gap: 14px;
+      }
+      .footer .from {
+        font:
+          italic 500 22px "Playfair Display",
+          serif;
+      }
+      .footer .heart {
+        font-size: 24px;
+        color: #f7b9d0;
+      }
+      .back-btn {
+        display: block;
+        margin: 20px auto 0;
+        padding: 11px 20px;
+        background: transparent;
+        border: 1px solid #f2b7ce;
+        border-radius: 40px;
+        color: #ffe0ec;
+        font:
+          600 12px "DM Sans",
+          sans-serif;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+      .back-btn:hover {
+        background: #f9dce8;
+        color: #641d37;
+      }
+      @media (max-width: 650px) {
+        .magazine {
+          border-width: 4px;
+        }
+        .masthead {
+          padding: 14px 17px;
+          font-size: 9px;
+          letter-spacing: 1px;
+        }
+        .hero {
+          padding: 30px 20px 23px;
+        }
+        .hero h1 {
+          font-size: clamp(43px, 11vw, 67px);
+        }
+        .hero .mark {
+          font-size: 46px;
+        }
+        .hero .sub {
+          font-size: 12px;
+        }
+        .feature {
+          grid-template-columns: 1fr;
+        }
+        .feature-image {
+          min-height: 270px;
+        }
+        .feature-quote {
+          padding: 24px 25px;
+        }
+        .feature-quote p {
+          font-size: 30px;
+        }
+        .story {
+          grid-template-columns: 1fr;
+          padding: 31px 23px 29px;
+          gap: 16px;
+        }
+        .side {
+          border: 0;
+          border-top: 2px solid #f1c2d4;
+          padding: 24px 0 0;
+          display: grid;
+          grid-template-columns: 120px 1fr;
+          gap: 25px;
+          justify-content: center;
+          align-items: center;
+        }
+        .second-photo {
+          grid-row: span 2;
+        }
+        .side .caption {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+        }
+        .side .tiny-note {
+          text-align: left;
+          margin: 0;
+        }
+        .footer {
+          padding: 16px 20px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page active" id="page1">
+      <div
+        class="envelope-wrap"
+        id="envelope-wrap"
+        role="button"
+        tabindex="0"
+        aria-label="Захидлыг нээх"
+        onclick="openEnvelope()"
+        onkeydown="
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openEnvelope();
+          }
+        "
+      >
+        <div class="envelope">
+          <div class="letter-peek">with love ♡</div>
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="seal">♡</div>
+        </div>
+      </div>
+      <div class="open-hint">tap to open your little surprise ✦</div>
+    </section>
+    <section class="page" id="page2" aria-hidden="true">
+      <main class="magazine">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">To the girl who makes life brighter</div>
+            <h1>Happy Birthday</h1>
+          </div>
+          <!-- <div class="mark">♡</div> -->
+        </div>
+        <div class="feature">
+          <div class="feature-image">
+            <div class="image-placeholder">
+              <span>our memories</span>photo1.jpg зургаа энд байрлуулаарай
+            </div>
+            <img
+              src="photo1.jpg"
+              alt="Бидний эхний зураг"
+              onerror="this.hidden = true"
+            />
+          </div>
+        </div>
+        <div class="story">
+          <div>
+            <h2>Хөөрхөн найздаа,</h2>
+            <p>
+            Чамтай ярилцахад ямар ч зүйлээ санаа зоволгүй ярьж болдог, зүгээр л
+              байгаагаар минь намайг ойлгодог чамдаа төрсөн өдрийн мэнд хүргэе. Миний амьдралд байдагт чинь
+              үнэхээр их баярлалаа.
+            </p>
+            <p>
+Чи минь их сайхан сэтгэлтэй, ухаалаг, халуухан охин шүү хха. Цаашид ч гэсэн өөрийнхөөрөө, аз жаргалтай байгаарай.
+            </p>
+          </div>
+          <aside class="side">
+            <div class="second-photo">
+              <div class="image-placeholder">
+                <span>you & me</span>photo2.jpg зургаа энд байрлуулаарай
+              </div>
+              <img
+                src="photo2.jpg"
+                alt="Бидний хоёр дахь зураг"
+                onerror="this.hidden = true"
+              />
+            </div>
+            <div class="caption">
+              21 нас хүрсэнд чинь баяр хүргэе. Хамгийн гоё гэсэн бүхнийг харж,
+              сонсож аз жаргалтай байна жүү♡
+            </div>
+          </aside>
+        </div>
+        <footer class="footer">
+          <span class="from">With love, Soko ♡</span
+          ><span class="heart">♥ ♥ ♥</span>
+        </footer>
+      </main>
+      <button class="back-btn" type="button" onclick="backToEnvelope()">
+        ← back to envelope
+      </button>
+    </section>
+    <script>
+      "use strict";
+      let opening = false;
+      let openTimer;
+      function openEnvelope() {
+        if (
+          opening ||
+          document.getElementById("page2").classList.contains("active")
+        )
+          return;
+        opening = true;
+        document.getElementById("envelope-wrap").classList.add("open");
+        clearTimeout(openTimer);
+        openTimer = setTimeout(() => {
+          const a = document.getElementById("page1"),
+            b = document.getElementById("page2");
+          a.classList.remove("active");
+          a.setAttribute("aria-hidden", "true");
+          b.classList.add("active");
+          b.removeAttribute("aria-hidden");
+          window.scrollTo(0, 0);
+          opening = false;
+        }, 950);
+      }
+      function backToEnvelope() {
+        clearTimeout(openTimer);
+        opening = false;
+        const a = document.getElementById("page1"),
+          b = document.getElementById("page2");
+        b.classList.remove("active");
+        b.setAttribute("aria-hidden", "true");
+        a.classList.add("active");
+        a.removeAttribute("aria-hidden");
+        document.getElementById("envelope-wrap").classList.remove("open");
+        window.scrollTo(0, 0);
+      }
+    </script>
+  </body>
+</html>
